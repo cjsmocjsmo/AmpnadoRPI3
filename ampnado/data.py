@@ -261,4 +261,12 @@ class Data:
 			print(phttp[0])
 			return phttp[0]["AlbumArtHttpPath"]
 			
-			
+#######################################################
+	def filename_in_db(self, fn):
+		data = pymongo.MongoClient(MONGO_ADDR).ampnadoDB
+		filez = [n for n in data.find({"Filename":fn})]
+		filenum = len(filez)
+		if filenum != 0:
+			return True
+		else:
+			return False
