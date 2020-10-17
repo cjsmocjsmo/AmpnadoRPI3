@@ -31,7 +31,7 @@ version = v.split('.')[0]
 version = int(version)
 
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
-VIEWSDB_ADDR = os.environ("AMP_VIEWSDB_ADDR")
+AMP_VIEWSDB_ADDR = os.environ("AMP_VIEWSDB_ADDR")
 PICDB_ADDR = os.environ['AMP_PICDB_ADDR']
 
 class Data:
@@ -172,56 +172,56 @@ class Data:
 ###############################################################################
 
 	def viewsdb_artalpha_insert(self, x):
-		data2 = pymongo.MongoClient(VIEWSDB_ADDR).ampviewsDB
+		data2 = pymongo.MongoClient(AMP_VIEWSDB_ADDR).ampviewsDB
 		try:
 			data2.artalpha.insert(x)
 		except TypeError:
 			data2.artalpha.insert_one(x)
 
 	def viewsdb_albalpha_insert(self, v):
-		data2 = pymongo.MongoClient(VIEWSDB_ADDR).ampviewsDB
+		data2 = pymongo.MongoClient(AMP_VIEWSDB_ADDR).ampviewsDB
 		try:
 			data2.albalpha.insert(v)
 		except TypeError:
 			data2.albalpha.insert_one(v)
 
 	def viewsdb_insert(self, av):
-		data2 = pymongo.MongoClient(VIEWSDB_ADDR).ampviewsDB
+		data2 = pymongo.MongoClient(AMP_VIEWSDB_ADDR).ampviewsDB
 		try:
 			data2.albumView.insert_one(av)
 		except TypeError:
 			data2.albumView.insert(av)
 
 	def viewsdb_albumview_update(self, albid):
-		data2 = pymongo.MongoClient(VIEWSDB_ADDR).ampviewsDB
+		data2 = pymongo.MongoClient(AMP_VIEWSDB_ADDR).ampviewsDB
 		try:
 			data2.albumView.update({'AlbumId': albid[0]}, {'$set': {'Page': albid[1]}})
 		except TypeError:
 			data2.albumView.update_one({'AlbumId': albid[0]}, {'$set': {'Page': albid[1]}})
 
 	def viewsdb_artistview_insert(self, z):
-		data2 = pymongo.MongoClient(VIEWSDB_ADDR).ampviewsDB
+		data2 = pymongo.MongoClient(AMP_VIEWSDB_ADDR).ampviewsDB
 		try:
 			data2.artistView.insert(z)
 		except TypeError:
 			data2.artistView.insert_one(z)
 
 	def viewsdb_artistview_update(self, c):
-		data2 = pymongo.MongoClient(VIEWSDB_ADDR).ampviewsDB
+		data2 = pymongo.MongoClient(AMP_VIEWSDB_ADDR).ampviewsDB
 		try:
 			data2.artistView.update({'Artist': c[0]}, {'$set': {'Page': c[1]}})
 		except TypeError:
 			data2.artistView.update_one({'Artist': c[0]}, {'$set': {'Page': c[1]}})
 
 	def viewsdb_songalpha_insert(self, x):
-		data2 = pymongo.MongoClient(VIEWSDB_ADDR).ampviewsDB
+		data2 = pymongo.MongoClient(AMP_VIEWSDB_ADDR).ampviewsDB
 		try:
 			data2.songalpha.insert(x)
 		except TypeError:
 			data2.songalpha.insert_one(x)
 	
 	def viewsdb_songview_insert(self, svl):
-		data2 = pymongo.MongoClient(VIEWSDB_ADDR).ampviewsDB
+		data2 = pymongo.MongoClient(AMP_VIEWSDB_ADDR).ampviewsDB
 		try:
 			data2.songView.insert(svl)
 		except TypeError:
