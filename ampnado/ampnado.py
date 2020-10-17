@@ -27,14 +27,14 @@ from pprint import pprint
 from data import Data
 
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
-VIESDB_ADDR = os.environ['AMP_VIEWSDB_ADDR'] 
+VIEWSDB_ADDR = os.environ("AMP_VIEWSDB_ADDR")
 PICDB_ADDR = os.environ['AMP_PICDB_ADDR']
 
 
 ampDBClient = MongoClient(MONGO_ADDR)
 ampDBClient.drop_database("ampnadoDB")
 
-ampvDBClient = MongoClient(VIESDB_ADDR)
+ampvDBClient = MongoClient(VIEWSDB_ADDR)
 ampvDBClient.drop_database("ampviewsDB")
 #client.drop_database("config")
 

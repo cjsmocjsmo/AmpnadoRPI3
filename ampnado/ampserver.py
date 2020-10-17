@@ -32,13 +32,13 @@ import pymongo
 import functions as Fun
 
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
-VIESDB_ADDR = os.environ['AMP_VIEWSDB_ADDR'] 
+VIEWSDB_ADDR = os.environ("AMP_VIEWSDB_ADDR")
 PICDB_ADDR = os.environ['AMP_PICDB_ADDR']
 
 ampDBClient = pymongo.MongoClient(MONGO_ADDR)
 db = ampDBClient.ampnadoDB
 
-ampVDBClient = pymongo.MongoClient(VIESDB_ADDR)
+ampVDBClient = pymongo.MongoClient(VIEWSDB_ADDR)
 viewsdb = ampVDBClient.ampviewsDB
 
 ampPDBClient = pymongo.MongoClient(PICDB_ADDR)
