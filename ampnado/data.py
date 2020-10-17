@@ -31,7 +31,7 @@ version = v.split('.')[0]
 version = int(version)
 
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
-VIEWSDB_ADDR = os.environ("AMP_VIEWSDB_ADDR")
+VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
 PICDB_ADDR = os.environ['AMP_PICDB_ADDR']
 
 class Data:
