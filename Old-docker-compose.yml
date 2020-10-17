@@ -1,25 +1,23 @@
 version: "3.3"
 
 services:
-  db:
-    # image: mongo:latest
-    image: andresvidal/rpi3-mongodb3:latest
+  ampdbserv:
+    image: andresvidal/rpi3-mongodb3
     networks:
-      - ampnado
+      - ampnadorpi
     ports:
       - 27017:27017
 
-  amp:
-    image: porthose/ampnado:latest
+  ampserv:
+    image: ampnadorpi:latest
     build: .
     environment:
-      - AMP_PROGRAM_PATH=/home/pi/ampnadoRPI3-noauth
-
-      - MONGO_AMPNADO_MONGODB_ADDR=mongodb://db:27017/ampnadoDB
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=example
+      - AMP_PROGRAM_PATH=/home/pi/Desktop/Ampnado
+      - AMP_AMPDB_ADDR=mongodb://ampdbserv:27017/ampnadoDB
+      - AMP_VIEWSDB_ADDR=mongodb://ampdbserv:27017/ampviewsDB
+      - AMP_PICDB_ADDR=mongodb://ampdbserv:27017/picdb
       - AMP_SETUP=1
-      - AMP_MEDIA_PATH=/usr/src/ampnado/Music
+      - AMP_MEDIA_PATH=/usr/share/ampnado/Music
       - AMP_HTTP_THUMBNAIL_DIR_PATH=/static/images/thumbnails
       - AMP_THUMBNAIL_DIR_PATH=./static/images/thumbnails
       - AMP_NO_ART_PIC_PATH=./static/images/noartpic.jpg
@@ -28,25 +26,23 @@ services:
       - AMP_OFFSET_SIZE=45
       - AMP_USERNAME=admin
       - AMP_PASSWORD=ampnado
-
     networks:
-      - ampnado
+      - ampnadorpi
     ports:
       - 6789:6789
     volumes:
-      - ampnadovol:/usr/src/ampnado/Music
+      - ampnadorpivol:/usr/share/ampnado/Music
     depends_on:
-      - db
+      - ampdbserv
 
 networks:
-  ampnado:
+  ampnadorpi:
 
 volumes:
-  ampnadovol:
+  ampnadorpivol:
     driver: local
     driver_opts:
       type: none
 #THIS NEEDS TO BE CHANGE TO THE CORRECT PATH ON THE PI
       device: /home/pi/Music
-      # device: /home/teresa/Music
       o: bind
