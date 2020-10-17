@@ -14,10 +14,10 @@ services:
     build: .
     environment:
       - AMP_PROGRAM_PATH=/home/pi/ampnadoRPI3-noauth
-
-      - MONGO_AMPNADO_MONGODB_ADDR=mongodb://db:27017/ampnadoDB
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=example
+      - AMP_AMPDB_ADDR=mongodb://ampdbserv:27017/ampnadoDB
+      # - MONGO_AMPNADO_MONGODB_ADDR=mongodb://db:27017/ampnadoDB
+      # - MONGO_INITDB_ROOT_USERNAME=root
+      # - MONGO_INITDB_ROOT_PASSWORD=example
       - AMP_SETUP=1
       - AMP_MEDIA_PATH=/usr/src/ampnado/Music
       - AMP_HTTP_THUMBNAIL_DIR_PATH=/static/images/thumbnails
