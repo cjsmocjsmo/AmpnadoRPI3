@@ -1,52 +1,53 @@
 version: "3.3"
 
 services:
-  db:
-    # image: mongo:latest
-    image: andresvidal/rpi3-mongodb3:latest
-    networks:
-      - ampnado
-    ports:
-      - 27017:27017
 
-  amp:
-    image: porthose/ampnado:latest
+  db:
+    image: andresvidal/rpi3-mongodb3
+    networks:
+      - ampnadorpi-noauth
+    ports:
+      - 27019:27019
+    # deploy:
+    #   replicas: 1
+    #   restart_policy:
+    #     condition: always
+
+  ampserv:
+    image: ampnadorpi-noauth:1.0
     build: .
     environment:
-      - AMP_PROGRAM_PATH=/home/pi/ampnadoRPI3-noauth
-      - AMP_AMPDB_ADDR=mongodb://ampdbserv:27017/ampnadoDB
-      # - MONGO_AMPNADO_MONGODB_ADDR=mongodb://db:27017/ampnadoDB
-      # - MONGO_INITDB_ROOT_USERNAME=root
-      # - MONGO_INITDB_ROOT_PASSWORD=example
+      - AMP_PROGRAM_PATH=/usr/share/Ampnado
+      - AMP_AMPDB_ADDR=mongodb://db:27019/ampnadoDB
+      - AMP_VIEWSDB_ADDR=mongodb://db:27019/ampviewsDB
+      - AMP_PICDB_ADDR=mongodb://db:27019/picdb
       - AMP_SETUP=1
-      - AMP_MEDIA_PATH=/usr/src/ampnado/Music
+      - AMP_MEDIA_PATH=/usr/share/Ampnado/Music
       - AMP_HTTP_THUMBNAIL_DIR_PATH=/static/images/thumbnails
-      - AMP_THUMBNAIL_DIR_PATH=./static/images/thumbnails
-      - AMP_NO_ART_PIC_PATH=./static/images/noartpic.jpg
-      - AMP_SERVER_ADDR=http://192.168.1.26
-      - AMP_SERVER_PORT=6789
+      - AMP_THUMBNAIL_DIR_PATH=/usr/share/Ampnado/static/images/thumbnails
+      - AMP_NO_ART_PIC_PATH=/usr/share/Ampnado/static/images/noartpic.jpg
+      - AMP_SERVER_ADDR=http://192.168.1.74
+      - AMP_SERVER_PORT=6790
       - AMP_OFFSET_SIZE=45
       - AMP_USERNAME=admin
       - AMP_PASSWORD=ampnado
-
     networks:
-      - ampnado
+      - ampnadorpi-noauth
     ports:
-      - 6789:6789
+      - 6790:6790
     volumes:
-      - ampnadovol:/usr/src/ampnado/Music
+      - ampnadorpi-noauthvol:/usr/share/Ampnado/Music
     depends_on:
       - db
 
 networks:
-  ampnado:
+  ampnadorpi-noauth:
 
 volumes:
-  ampnadovol:
+  ampnadorpi-noauthvol:
     driver: local
     driver_opts:
       type: none
 #THIS NEEDS TO BE CHANGE TO THE CORRECT PATH ON THE PI
       device: /home/pi/Music
-      # device: /home/teresa/Music
       o: bind
