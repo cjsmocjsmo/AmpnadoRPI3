@@ -7,10 +7,6 @@ services:
       - ampnadorpi
     ports:
       - 27017:27017
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: always
 
   ampserv:
     image: ampnadorpi:latest
@@ -38,10 +34,6 @@ services:
       - ampnadorpivol:/usr/share/ampnado/Music
     depends_on:
       - ampdbserv
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: always
 
 networks:
   ampnadorpi:
