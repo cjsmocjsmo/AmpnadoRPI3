@@ -26,7 +26,7 @@ except ImportError: from mutagenx import File
 import metatags as MT
 
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
-VIEWSDB_ADDR = os.environ("AMP_VIEWSDB_ADDR")
+VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
 
 
 
