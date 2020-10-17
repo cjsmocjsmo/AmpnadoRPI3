@@ -1,11 +1,10 @@
 version: "3.3"
 
 services:
-
   db:
     image: andresvidal/rpi3-mongodb3
     networks:
-      - ampnadorpi-noauth
+      - ampnadorpi
     ports:
       - 27019:27019
     # deploy:
@@ -14,7 +13,7 @@ services:
     #     condition: always
 
   ampserv:
-    image: ampnadorpi-noauth:1.0
+    image: ampnadorpi:1.0
     build: .
     environment:
       - AMP_PROGRAM_PATH=/usr/share/Ampnado
@@ -26,25 +25,25 @@ services:
       - AMP_HTTP_THUMBNAIL_DIR_PATH=/static/images/thumbnails
       - AMP_THUMBNAIL_DIR_PATH=/usr/share/Ampnado/static/images/thumbnails
       - AMP_NO_ART_PIC_PATH=/usr/share/Ampnado/static/images/noartpic.jpg
-      - AMP_SERVER_ADDR=http://192.168.1.74
+      - AMP_SERVER_ADDR=http://192.168.1.26
       - AMP_SERVER_PORT=6790
       - AMP_OFFSET_SIZE=45
       - AMP_USERNAME=admin
       - AMP_PASSWORD=ampnado
     networks:
-      - ampnadorpi-noauth
+      - ampnadorpi
     ports:
       - 6790:6790
     volumes:
-      - ampnadorpi-noauthvol:/usr/share/Ampnado/Music
+      - ampnadorpivol:/usr/share/Ampnado/Music
     depends_on:
       - db
 
 networks:
-  ampnadorpi-noauth:
+  ampnadorpi:
 
 volumes:
-  ampnadorpi-noauthvol:
+  ampnadorpivol:
     driver: local
     driver_opts:
       type: none
