@@ -97,29 +97,29 @@ class SetUp():
 		albviewtime = ftime - atime
 		print("Albumview time %s" % albviewtime)		
 
-		from songview import SongView
-		SongView().create_songView_db(os.environ["AMP_OFFSET_SIZE"])
-		gtime = time.time()
-		songviewtime = gtime - atime
-		print("Songview time %s" % songviewtime)
+		# from songview import SongView
+		# SongView().create_songView_db(os.environ["AMP_OFFSET_SIZE"])
+		# gtime = time.time()
+		# songviewtime = gtime - atime
+		# print("Songview time %s" % songviewtime)
 		
-		from functions import Indexes
-		Indexes().creat_db_indexes()
-		htime = time.time()
-		indextime = htime - atime
-		print("Index time %s" % indextime)
+		# from functions import Indexes
+		# Indexes().creat_db_indexes()
+		# htime = time.time()
+		# indextime = htime - atime
+		# print("Index time %s" % indextime)
 		
-		from functions import DbStats
-		DbStats().db_stats()
-		itime = time.time()
-		statstime = itime - atime
-		print("DBStats time is %s" % statstime)
+		# from functions import DbStats
+		# DbStats().db_stats()
+		# itime = time.time()
+		# statstime = itime - atime
+		# print("DBStats time is %s" % statstime)
 
-		from functions import RandomArtDb
-		RandomArtDb().create_random_art_db()
-		jtime = time.time()
-		ranarttime = jtime - atime
-		print("RandomArtDB time is %s" % ranarttime)
+		# from functions import RandomArtDb
+		# RandomArtDb().create_random_art_db()
+		# jtime = time.time()
+		# ranarttime = jtime - atime
+		# print("RandomArtDB time is %s" % ranarttime)
 
 
 
