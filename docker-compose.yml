@@ -33,7 +33,7 @@ services:
     networks:
       - ampnadorpi
     ports:
-      - 6790:6790
+      - 6795:6795
     volumes:
       - ampnadorpivol:/usr/share/Ampnado/Music
     depends_on:
