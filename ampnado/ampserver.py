@@ -61,12 +61,6 @@ off_set = int(os.environ["AMP_OFFSET_SIZE"])
 # 	type=int,
 # )
 # off_set = int(US_OP['offset_size'])
-define('server_port',
-	default= os.environ["AMP_SERVER_PORT"],
-
-	help='run on the given port',
-	type=str,
-)
 
 
 
