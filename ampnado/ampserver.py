@@ -54,22 +54,9 @@ define('server_port',
 )
 
 off_set = int(os.environ["AMP_OFFSET_SIZE"])
-# US_OP = db.options.find_one({})
-# define('server_port',
-# 	default=US_OP['server_port'],
-# 	help='run on the given port',
-# 	type=int,
-# )
-# off_set = int(US_OP['offset_size'])
-
-
 
 class Application(tornado.web.Application):
 	def __init__(self):
-#		mpath = db.options.find_one({}, {'media_path': 1, '_id': 0})
-		#mpath = "/home/pi/Music/"
-		#mpath = "/home/teresa/Music"
-		#progpath = db.prog_paths.find_one({}, {'programPath':1, '_id':0})
 		mpath = os.environ["AMP_MEDIA_PATH"]
 		handlers = [
 			(r"/Music/(.*)", tornado.web.StaticFileHandler, {'path': mpath}),
@@ -103,11 +90,7 @@ class Application(tornado.web.Application):
 			(r"/SongSearch", SongSearchHandler),
 		]
 		settings = dict(
-#			static_path = os.path.join(os.path.dirname(__file__), "static"),
-#			static_path = os.environ["AMP_PROGRAM_PATH"] + "/ampnado/static",
 			static_path = "/usr/share/Ampnado/static",
-#			template_path = os.path.join(os.path.dirname(__file__), "templates"),
-#			template_path = os.environ["AMP_PROGRAM_PATH"] + "/ampnado/templates",
 			template_path = "/usr/share/Ampnado/templates",
 			login_url = "/login",
 			cookie_secret = hashlib.sha512(str(random.randrange(100)).encode('utf-8')).hexdigest(),
@@ -560,7 +543,6 @@ class RandomPicsHandler(BaseHandler):
 				x['thumbnail'] = ace['AlbumArtHttpPath']
 			except TypeError:
 				print(r)
-				#x["thumbnail"] = "./static/images/noartpic.jpg"
 			x['songs'] = [(song['Song'], song['SongId']) for song in db.main.find({'AlbumId':r}, {'Song':1, 'SongId':1, '_id':0})]
 			art.append(x)
 		self.write(dict(rsamp=art))

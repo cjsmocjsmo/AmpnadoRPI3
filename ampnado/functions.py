@@ -28,30 +28,20 @@ import metatags as MT
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
 VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
 
-
-
 ampDBClient = MongoClient(MONGO_ADDR)
 db = ampDBClient.ampnadoDB
 
 ampVDBClient = MongoClient(VIEWSDB_ADDR)
 viewsdb = ampVDBClient.ampviewsDB
 
-
-
 class FindMedia:
 
-	# def db_filename_check(self, fn):
-
-		
 	def find_music(self, ptm):
 		try:
 			for (paths, dirs, files) in os.walk(ptm, followlinks=True):
 				for filename in files:
 					print("Processing:\n %s" % filename)
 					fnn = os.path.join(paths, filename)
-					# if Data.filename_in_db:
-					# 	print("File already in db")
-					# else:
 					ext = os.path.splitext(fnn)[1].lower()
 					if ext == ".mp3":
 						Meta = MT.FileMeta(fnn)
