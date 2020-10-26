@@ -23,8 +23,8 @@ from data import Data
 class SongView:
 	def __init__(self):
 		self.tags = Data().tags_all_song_songid_artist()
-		print("THIS IS SONGID ARTIST")
-		print([print(s) for s in self.tags])
+		# print("THIS IS SONGID ARTIST")
+		# print([print(s) for s in self.tags])
 		self.songalphaoffsetlist = []
 		self.songviewlist = []
 
@@ -43,7 +43,7 @@ class SongView:
 		page = 1
 		
 		for s in self.tags:
-			print("THIS IS S \n")
+			print("THIS IS S IN SELF.TAGS \n")
 			print(s)
 			count += 1
 			if count == int(OFC):
@@ -55,6 +55,8 @@ class SongView:
 			x['Song'] = s['Song']
 			x['SongId'] = s['SongId']
 			x['Artist'] = s['Artist']
+			print("THIS IS X \n")
+			print(x)
 			self.songviewlist.append(x)
 		songalphaoffsetlist1 = self.rm_dups_songalpha(self.songalphaoffsetlist)
 		self.insert_songalpha(songalphaoffsetlist1)
