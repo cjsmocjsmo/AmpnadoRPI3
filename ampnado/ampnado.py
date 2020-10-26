@@ -97,11 +97,11 @@ class SetUp():
 		albviewtime = ftime - atime
 		print("Albumview time %s" % albviewtime)		
 
-		from songview import SongView
-		SongView().create_songView_db(os.environ["AMP_OFFSET_SIZE"])
-		gtime = time.time()
-		songviewtime = gtime - atime
-		print("Songview time %s" % songviewtime)
+		# from songview import SongView
+		# SongView().create_songView_db(os.environ["AMP_OFFSET_SIZE"])
+		# gtime = time.time()
+		# songviewtime = gtime - atime
+		# print("Songview time %s" % songviewtime)
 		
 		# from functions import Indexes
 		# Indexes().creat_db_indexes()
