@@ -105,10 +105,10 @@ class Application(tornado.web.Application):
 		settings = dict(
 #			static_path = os.path.join(os.path.dirname(__file__), "static"),
 #			static_path = os.environ["AMP_PROGRAM_PATH"] + "/ampnado/static",
-			static_path = "./static",
+			static_path = "/usr/share/Ampnado/static",
 #			template_path = os.path.join(os.path.dirname(__file__), "templates"),
 #			template_path = os.environ["AMP_PROGRAM_PATH"] + "/ampnado/templates",
-			template_path = "./templates",
+			template_path = "/usr/share/Ampnado/templates",
 			login_url = "/login",
 			cookie_secret = hashlib.sha512(str(random.randrange(100)).encode('utf-8')).hexdigest(),
 			xsrf_cookies = True,
