@@ -31,10 +31,15 @@ class Thumbnails():
 
 	def get_smallthumb(self, size, location, filename):
 		try:
-			im2 = Image.open(filename)
-			im2.load()
-			im2.thumbnail(size, Image.ANTIALIAS)
-			im2.save(location, "JPEG")
+			with Image.open(filename) as im2:
+				im2.load()
+				im2.thumbnail(size, Image.ANTIALIAS)
+				im2.save(location, "JPEG")
+
+			# im2 = Image.open(filename)
+			# im2.load()
+			# im2.thumbnail(size, Image.ANTIALIAS)
+			# im2.save(location, "JPEG")
 		except OSError:
 			pass
 
