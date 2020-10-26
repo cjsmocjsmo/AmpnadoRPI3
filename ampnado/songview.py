@@ -24,7 +24,7 @@ class SongView:
 	def __init__(self):
 		self.tags = Data().tags_all_song_songid_artist()
 		print("THIS IS SONGID ARTIST")
-		print(self.tags)
+		print([print(s) for s in self.tags])
 		self.songalphaoffsetlist = []
 		self.songviewlist = []
 
@@ -34,6 +34,8 @@ class SongView:
 		Data().viewsdb_songalpha_insert(dict(songalpha=z))
 	
 	def insert_songview(self, w):
+		print("this is w")
+		print(w)
 		Data().viewsdb_songview_insert(w)
 		
 	def create_songView_db(self, OFC):
