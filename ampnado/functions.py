@@ -49,29 +49,29 @@ class FindMedia:
 				for filename in files:
 					print("Processing:\n %s" % filename)
 					fnn = os.path.join(paths, filename)
-					if Data.filename_in_db:
-						print("File already in db")
-					else:
-						ext = os.path.splitext(fnn)[1].lower()
-						if ext == ".mp3":
-							Meta = MT.FileMeta(fnn)
-							Mp3 = MT.MP3Tags(fnn)
-							x = {
-								"Filename": fnn,
-								"Extension": ext,
-								"Size": Meta.Size,
-								"DirPath": Meta.DirPath,
-								"SongId": Meta.SongId,
-								"Artist": Mp3.Artist,
-								"Album": Mp3.Album,
-								"Song": Mp3.Song,
-								"Track": Mp3.Track,
-								"PicId": "",
-								"ArtistId": "",
-								"AlbumId": "",
-								"HttpMusicPath": "/" + fnn.split("/", 4)[4],
-							}
-							db.main.insert(x)
+					# if Data.filename_in_db:
+					# 	print("File already in db")
+					# else:
+					ext = os.path.splitext(fnn)[1].lower()
+					if ext == ".mp3":
+						Meta = MT.FileMeta(fnn)
+						Mp3 = MT.MP3Tags(fnn)
+						x = {
+							"Filename": fnn,
+							"Extension": ext,
+							"Size": Meta.Size,
+							"DirPath": Meta.DirPath,
+							"SongId": Meta.SongId,
+							"Artist": Mp3.Artist,
+							"Album": Mp3.Album,
+							"Song": Mp3.Song,
+							"Track": Mp3.Track,
+							"PicId": "",
+							"ArtistId": "",
+							"AlbumId": "",
+							"HttpMusicPath": "/" + fnn.split("/", 4)[4],
+						}
+						db.main.insert(x)
 		except TypeError:
 			exit()
 
