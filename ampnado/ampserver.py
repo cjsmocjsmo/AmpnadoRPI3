@@ -30,6 +30,7 @@ import tornado.web
 from tornado.options import define, options, parse_command_line
 import pymongo
 import functions as Fun
+import backup as BU
 
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
 VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
@@ -88,6 +89,10 @@ class Application(tornado.web.Application):
 			(r"/ArtistSearch", ArtistSearchHandler),
 			(r"/AlbumSearch", AlbumSearchHandler),
 			(r"/SongSearch", SongSearchHandler),
+			(r"/CreateBackup", CreateBackupHandler),
+			# (r"/UpdateBackup", UpdateBackupHandler),
+			(r"/DeleteBackpu", DeleteBackupHandler),
+
 		]
 		settings = dict(
 			static_path = "/usr/share/Ampnado/static",
@@ -546,7 +551,30 @@ class RandomPicsHandler(BaseHandler):
 			x['songs'] = [(song['Song'], song['SongId']) for song in db.main.find({'AlbumId':r}, {'Song':1, 'SongId':1, '_id':0})]
 			art.append(x)
 		self.write(dict(rsamp=art))
-	
+
+class CreateBackupHandler(BaseHandler):
+	@tornado.web.authenticated
+	@tornado.gen.coroutine
+	def get(self):
+		cbd = BU.CreateBackupDirs()
+		if not cbd.checkbdir:
+			foo = BU.CreateBackups()
+			foo.CreateAllBackups()
+
+class DeleteBackupHandler(BaseHandler):
+	@tornado.web.authenticated
+	@tornado.gen.coroutine
+	def get(self):
+		bar = BU.CreateBackups()
+		bar.DelAllBackups()
+
+# class UpdateBackupHandler(BaseHandler):
+# 	@tornado.web.authenticated
+# 	@tornado.gen.coroutine
+# 	def get(self):
+# 		print("fuck")
+
+
 def main():
 	tornado.options.parse_command_line()
 	http_server = tornado.httpserver.HTTPServer(Application())
