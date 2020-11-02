@@ -80,7 +80,7 @@ class CreateBackups:
         for a in aitem:
             count += 1
             newfile = addr + "/ampBackup_" + str(count) + ".yaml"
-            with open(newfile, "w") as nf:
+            with open(newfile, "w+") as nf:
                 yaml.dump(a, nf)
 
     def MainBackup(self):
