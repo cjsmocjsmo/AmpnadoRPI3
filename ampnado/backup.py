@@ -70,10 +70,10 @@ class CreateBackups:
         self.pdb = "/picdb"
         self.p9 = BDIR + self.pdb + "/pics"
 
-        # self.dirlist = [
-        #     self.p1, self.p2, self.p3, self.p4, 
-        #     self.p5, self.p6, self.p7, self.p8, self.p9
-        # ]
+        self.dirlist = [
+            self.p1, self.p2, self.p3, self.p4, 
+            self.p5, self.p6, self.p7, self.p8, self.p9
+        ]
 
     def createpages(self, aitem, addr):
         count = 0
@@ -83,6 +83,11 @@ class CreateBackups:
             with open(newfile, "w+") as nf:
                 yaml.dump(a, nf)
 
+    def makedirs(self):
+        for d in self.dirlist:
+            if not os.path.isdir(d):
+                os.makedirs(d)
+
     def MainBackup(self):
         allmain = db.main.find({}, {"_id": 0})
         self.createpages(allmain, self.p1)
@@ -90,11 +95,6 @@ class CreateBackups:
     def UserCredsBackup(self):
         allcreds = db.user_creds.find({}, {"_id": 0})
         self.createpages(allcreds, self.p2)
-
-    def DelMainBackup(self):
-        shutil.rmtree(self.adb)
-
-
 
     def ArtAlphaBackup(self):
         allartalpha = viewsdb.artalpha.find({}, {"_id": 0})
@@ -120,17 +120,12 @@ class CreateBackups:
         allsongview = viewsdb.songView.find({}, {"_id": 0})
         self.createpages(allsongview, self.p8)
 
-    def DelViewsBackup(self):
-        shutil.rmtree(self.avdb)
-
     def PicBackup(self):
         allpics = pdb.pics.find({}, {"_id": 0})
         self.createpages(allpics, self.p9)
 
-    def DelPicBackup(self):
-        shutil.rmtree(self.pdb)  
-
     def CreateAllBackups(self):
+        self.makedirs()
         self.MainBackup()
         self.UserCredsBackup()
         self.ArtAlphaBackup()
@@ -142,9 +137,7 @@ class CreateBackups:
         self.PicBackup()
 
     def DelAllBackups(self):
-        self.DelMainBackup()
-        self.DelViewsBackup()
-        self.DelPicBackup()
+        shutil.rmtree(BDIR)
 
 # if __name__ == "__main__":
 #     dbb = CreateBackupDirs()
