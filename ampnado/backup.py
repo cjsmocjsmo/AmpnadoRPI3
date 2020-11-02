@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import os
-import yaml
+# import yaml
 import glob
 import pymongo
 
