@@ -25,6 +25,7 @@ import findjpgs as fj
 from pymongo import MongoClient
 from pprint import pprint
 from data import Data
+import backup as BUP
 
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
 VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
@@ -102,7 +103,14 @@ class SetUp():
 		gtime = time.time()
 		songviewtime = gtime - atime
 		print("Songview time %s" % songviewtime)
-		
+
+		bdirs = BUP.CreateBackupDirs()
+		backup = BUP.CreateBackups()
+		if not bdirs.checkbdir():
+			bdirs.createbdir()
+		backup.CreateAllBackups()
+
+
 		# from functions import Indexes
 		# Indexes().creat_db_indexes()
 		# htime = time.time()
