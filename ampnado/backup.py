@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 import os
-# import yaml
+import yaml
 import glob
+import shutil
 import pymongo
 
 BDIR = "/home/pi/AmpBackups"
@@ -24,8 +25,10 @@ class CreateBackupDirs:
         for a in self.ampPaths:
             p = BDIR + a
             try:
-                os.mkdir(p)
+                os.makedirs(p, mode=0o777)
             except FileExistsError:
+                shutil.rmtree(p)
+                os.makedirs(p, mode=0o777)
                 print("Dir Already exists")
                 pass
 
@@ -52,22 +55,25 @@ pdb = ampPDBClient.picdb
 class CreateBackups:
 
     def __init__(self):
-        self.p1 = BDIR + "/ampnadoDB/main"
-        self.p2 = BDIR + "/ampnadoDB/user_creds"
+        self.adb = "/ampnadoDB"
+        self.p1 = BDIR + self.adb + "/main"
+        self.p2 = BDIR + self.adb + "/user_creds"
 
-        self.p3 = BDIR + "/ampviewsDB/artalpha"
-        self.p4 = BDIR + "/ampviewsDB/albalpha"
-        self.p5 = BDIR + "/ampviewsDB/songalpha"
+        self.avdb = "/ampviewsDB"
+        self.p3 = BDIR + self.avdb + "artalpha"
+        self.p4 = BDIR + self.avdb + "/albalpha"
+        self.p5 = BDIR + self.avdb + "/songalpha"
+        self.p6 = BDIR + self.avdb + "artistView"
+        self.p7 = BDIR + self.avdb + "/albumView"
+        self.p8 = BDIR + self.avdb + "/songView"
 
-        self.p6 = BDIR + "/ampviewsDB/artistView"
-        self.p7 = BDIR + "/ampviewsDB/albumView"
-        self.p8 = BDIR + "/ampviewsDB/songView"
-        self.p9 = BDIR + "/picdb/pics"
+        self.pdb = "/picdb"
+        self.p9 = BDIR + self.pdb + "/pics"
 
-        self.dirlist = [
-            self.p1, self.p2, self.p3, self.p4, 
-            self.p5, self.p6, self.p7, self.p8, self.p9
-        ]
+        # self.dirlist = [
+        #     self.p1, self.p2, self.p3, self.p4, 
+        #     self.p5, self.p6, self.p7, self.p8, self.p9
+        # ]
 
     def createpages(self, aitem, addr):
         count = 0
@@ -81,21 +87,12 @@ class CreateBackups:
         allmain = db.main.find({}, {"_id": 0})
         self.createpages(allmain, self.p1)
 
-    def DelMainBackup(self):
-        gpat = self.p1 + "/*.yaml"
-        mglob = glob.glob(gpat)
-        [os.remove(m) for m in mglob]
-
-
-
     def UserCredsBackup(self):
         allcreds = db.user_creds.find({}, {"_id": 0})
         self.createpages(allcreds, self.p2)
 
-    def DelUserCredsBackup(self):
-        gpat = self.p2 + "/*.yaml"
-        ucglob = glob.glob(gpat)
-        [os.remove(uc) for uc in ucglob]
+    def DelMainBackup(self):
+        shutil.rmtree(self.adb)
 
 
 
@@ -103,74 +100,35 @@ class CreateBackups:
         allartalpha = viewsdb.artalpha.find({}, {"_id": 0})
         self.createpages(allartalpha, self.p3)
 
-    def DelArtAlphaBackup(self):
-        gpat = self.p3 + "/*.yaml"
-        aaglob = glob.glob(gpat)
-        [os.remove(aa) for aa in aaglob]
-
-
-
     def AlbAlphaBackup(self):
         allalbalpha = viewsdb.albalpha.find({}, {"_id": 0})
         self.createpages(allalbalpha, self.p4)
-
-    def DelAlbAlphaBackup(self):
-        gpat = self.p4 + "/*.yaml"
-        aalglob = glob.glob(gpat)
-        [os.remove(aal) for aal in aalglob]
-
-
 
     def SongAlphaBackup(self):
         allsongalpha = viewsdb.songalpha.find({}, {"_id": 0})
         self.createpages(allsongalpha, self.p5)
 
-    def DelSongAlphaBackup(self):
-        gpat = self.p5 + "/*.yaml"
-        saglob = glob.glob(gpat)
-        [os.remove(sa) for sa in saglob]
-
-
     def ArtViewBackup(self):
         allartview = viewsdb.artistView.find({}, {"_id": 0})
         self.createpages(allartview, self.p6)
-
-    def DelArtViewBackup(self):
-        gpat = self.p6 + "/*.yaml"
-        avglob = glob.glob(gpat)
-        [os.remove(av) for av in avglob]
-
 
     def AlbViewBackup(self):
         allalbview = viewsdb.albumView.find({}, {"_id": 0})
         self.createpages(allalbview, self.p7)
 
-    def DelAlbViewBackup(self):
-        gpat = self.p7 + "/*.yaml"
-        alvglob = glob.glob(gpat)
-        [os.remove(alv) for alv in alvglob]
-
-
-
     def SongViewBackup(self):
         allsongview = viewsdb.songView.find({}, {"_id": 0})
         self.createpages(allsongview, self.p8)
 
-    def DelSongViewBackup(self):
-        gpat = self.p8 + "/*.yaml"
-        sglob = glob.glob(gpat)
-        [os.remove(s) for s in sglob]
-
+    def DelViewsBackup(self):
+        shutil.rmtree(self.avdb)
 
     def PicBackup(self):
         allpics = pdb.pics.find({}, {"_id": 0})
         self.createpages(allpics, self.p9)
 
     def DelPicBackup(self):
-        gpat = self.p9 + "/*.yaml"
-        pglob = glob.glob(gpat)
-        [os.remove(p) for p in pglob]
-
+        shutil.rmtree(self.pdb)  
 
     def CreateAllBackups(self):
         self.MainBackup()
@@ -185,13 +143,7 @@ class CreateBackups:
 
     def DelAllBackups(self):
         self.DelMainBackup()
-        self.DelUserCredsBackup()
-        self.DelArtAlphaBackup()
-        self.DelAlbAlphaBackup()
-        self.DelSongAlphaBackup()
-        self.DelAlbViewBackup()
-        self.DelArtViewBackup()
-        self.DelSongViewBackup()
+        self.DelViewsBackup()
         self.DelPicBackup()
 
 # if __name__ == "__main__":

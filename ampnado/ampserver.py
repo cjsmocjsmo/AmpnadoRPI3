@@ -20,7 +20,7 @@
 ###############################################################################
 ####To background this script invoke it with this command
 ####nohup python3 server.py &>/dev/null &
-import yaml
+
 import os, random, hashlib, re, time, uuid, shutil
 from urllib.parse import urlparse, parse_qs
 import tornado.auth
