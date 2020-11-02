@@ -60,10 +60,10 @@ class CreateBackups:
         self.p2 = BDIR + self.adb + "/user_creds"
 
         self.avdb = "/ampviewsDB"
-        self.p3 = BDIR + self.avdb + "artalpha"
+        self.p3 = BDIR + self.avdb + "/artalpha"
         self.p4 = BDIR + self.avdb + "/albalpha"
         self.p5 = BDIR + self.avdb + "/songalpha"
-        self.p6 = BDIR + self.avdb + "artistView"
+        self.p6 = BDIR + self.avdb + "/artistView"
         self.p7 = BDIR + self.avdb + "/albumView"
         self.p8 = BDIR + self.avdb + "/songView"
 
