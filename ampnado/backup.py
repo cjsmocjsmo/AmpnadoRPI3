@@ -5,7 +5,7 @@ import glob
 import shutil
 import pymongo
 
-BDIR = "/home/pi/AmpBackups"
+BDIR = "/home/AmpBackups"
 
 class CreateBackupDirs:
     def __init__(self):
