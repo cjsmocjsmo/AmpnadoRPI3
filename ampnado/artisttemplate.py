@@ -18,8 +18,8 @@ class CreateMyXML:
         m13 = "    <AlbumId>{}</lbumId>".format(data.AlbumId)
         m14 = "    <HttpMusicPath>{}</HttpMusicPath>".format(data.HttpMusicPath)
         m15 = "</main>"
-        return [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15]
-
+        mainXML = [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15]
+        return mainXML
 # albalpha
 # { "_id" : ObjectId("5fa08dff7bd25100016b189f"), "albalpha" : [ "1" ] }
 

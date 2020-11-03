@@ -89,11 +89,11 @@ class CreateBackups:
         at = AT.CreateMyXML()
         count = 0
         for a in aitem:
+            dataxml = at.CreateMainXML(a)
             count += 1
-            data = at.CreateMainXML(a)
             newfile2 = addr + "/ampBackup_" + str(count) + ".xml"
             with open(newfile2, "w+") as nff:
-                for d in data:
+                for d in dataxml:
                     nff.writelines(d)
 
     def makedirs(self):
