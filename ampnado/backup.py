@@ -106,6 +106,7 @@ class CreateBackups:
 
     def MainBackup(self):
         allmain = db.main.find({}, {"_id": 0})
+        print(allmain)
         self.createMainXmlPages(allmain, self.p1)
 
     def UserCredsBackup(self):
