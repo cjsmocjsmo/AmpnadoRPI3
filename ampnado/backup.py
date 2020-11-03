@@ -90,9 +90,9 @@ class CreateBackups:
         count = 0
         for a in aitem:
             count += 1
-            newfile = addr + "/ampBackup_" + str(count) + ".yaml"
-            with open(newfile, "w+") as nf:
-                yaml.dump(a, nf)
+            # newfile = addr + "/ampBackup_" + str(count) + ".yaml"
+            # with open(newfile, "w+") as nf:
+            #     yaml.dump(a, nf)
 
             newfile2 = addr + "/ampBackup_" + str(count) + ".xml"
             with open(newfile2, "w+") as nff:
@@ -106,6 +106,7 @@ class CreateBackups:
 
     def MainBackup(self):
         allmain = db.main.find({}, {"_id": 0})
+        print("THIS IS ALLMAIN ALLMAIN:")
         print(allmain)
         self.createMainXmlPages(allmain, self.p1)
 
