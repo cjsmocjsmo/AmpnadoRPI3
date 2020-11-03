@@ -105,6 +105,8 @@ class SetUp():
 		print("Songview time %s" % songviewtime)
 
 		bdirs = BUP.CreateBackupDirs()
+		if not os.path.isdir("/home/AmpBackups"):
+			os.mkdir("/home/AmpBackups")
 		if not bdirs.checkbdir():
 			bdirs.createbdir()
 
