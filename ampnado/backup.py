@@ -95,6 +95,8 @@ class CreateBackups:
         cmx = AT.CreateMyXML()
         count = 0
         for a in allmain:
+            print("THIS IS A FROM ALLMAIN")
+            print(a)
             dataxml = cmx.CreateMainXML(a)
             count += 1
             newfile2 = self.p1 + "/ampBackup_" + str(count) + ".xml"
