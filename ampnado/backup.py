@@ -99,8 +99,7 @@ class CreateBackups:
         allmain = db.main.find({}, {"_id": 0})
         count = 0
         for a in allmain:
-            print("THIS IS A FROM ALLMAIN")
-            print(a)
+
             dataxml = CMXML.CreateMainXML(a)
             count += 1
             newfile2 = self.p1 + "/ampBackup_" + str(count) + ".xml"
@@ -179,6 +178,8 @@ class CreateBackups:
         allpics = pdb.pics.find({}, {"_id": 0})
         count = 0
         for a in allpics:
+            print("THIS IS A FROM ALLPICS")
+            print(a)
             dataxml = CMXML.CreatePicsXML(a)
             count += 1
             newfile = self.p9 + "/ampBackup_" + str(count) + ".xml"
