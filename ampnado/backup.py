@@ -84,26 +84,25 @@ class CreateBackups:
             with open(newfile, "w+") as nf:
                 yaml.dump(a, nf)
 
-
-    def createMainXmlPages(self, aitem, addr):
-        at = AT.CreateMyXML()
-        count = 0
-        for a in aitem:
-            dataxml = at.CreateMainXML(a)
-            count += 1
-            newfile2 = addr + "/ampBackup_" + str(count) + ".xml"
-            with open(newfile2, "w+") as nff:
-                for d in dataxml:
-                    nff.writelines(d)
-
     def makedirs(self):
         for d in self.dirlist:
             if not os.path.isdir(d):
                 os.makedirs(d)
 
+
     def MainBackup(self):
         allmain = db.main.find({}, {"_id": 0})
-        self.createMainXmlPages(allmain, self.p1)
+        cmx = AT.CreateMyXML()
+        count = 0
+        for a in allmain:
+            dataxml = cmx.CreateMainXML(a)
+            count += 1
+            newfile2 = self.p1 + "/ampBackup_" + str(count) + ".xml"
+            with open(newfile2, "w+") as nff:
+                for d in dataxml:
+                    nff.writelines(d)
+
+       
 
     def UserCredsBackup(self):
         allcreds = db.user_creds.find({}, {"_id": 0})
