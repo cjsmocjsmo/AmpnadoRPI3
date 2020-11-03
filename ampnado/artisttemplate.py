@@ -87,13 +87,14 @@ class CreateMyXML:
         a6 = "\t <PicPath>{}</PicPath> \n".format(data["PicPath"])
         a7 = "\t <ext>{}</ext> \n".format(data["ext"])
         a8 = "\t <AlbumArtSize>{}</AlbumArtSize> \n".format(data["AlbumArtSize"])
-        a9 = "\t <mp3glob> \n"
-        picsXML = [self.m1, a1, a2, a3, a4, a5, a6, a7, a8, a9]
-        for s in data["mp3glob"]:
-            a10 = "\t\t <item>{}</item> \n".format(s)
-            picsXML.append(a10)
-        a11 = "\t </mp3glob> \n"
-        picsXML.append(a11)
+        
+        picsXML = [self.m1, a1, a2, a3, a4, a5, a6, a7, a8]
+        # a9 = "\t <mp3glob> \n"
+        # for s in data["mp3glob"]:
+        #     a10 = "\t\t <item>{}</item> \n".format(s)
+        #     picsXML.append(a10)
+        # a11 = "\t </mp3glob> \n"
+        # picsXML.append(a11)
         a12 = "</Pics> \n"
         picsXML.append(a12)
         return picsXML
