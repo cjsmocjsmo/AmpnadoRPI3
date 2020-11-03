@@ -105,9 +105,10 @@ class SetUp():
 		print("Songview time %s" % songviewtime)
 
 		bdirs = BUP.CreateBackupDirs()
-		backup = BUP.CreateBackups()
 		if not bdirs.checkbdir():
 			bdirs.createbdir()
+
+		backup = BUP.CreateBackups()
 		backup.CreateAllBackups()
 
 

@@ -53,6 +53,8 @@ viewsdb = ampVDBClient.ampviewsDB
 ampPDBClient = pymongo.MongoClient(PICDB_ADDR)
 pdb = ampPDBClient.picdb
 
+CMXML = AT.CreateMyXML()
+
 class CreateBackups:
 
     def __init__(self):
@@ -76,72 +78,118 @@ class CreateBackups:
             self.p5, self.p6, self.p7, self.p8, self.p9
         ]
 
-    def createpages(self, aitem, addr):
-        count = 0
-        for a in aitem:
-            count += 1
-            newfile = addr + "/ampBackup_" + str(count) + ".yaml"
-            with open(newfile, "w+") as nf:
-                yaml.dump(a, nf)
+    # def createpages(self, aitem, addr):
+    #     count = 0
+    #     for a in aitem:
+    #         count += 1
+    #         newfile = addr + "/ampBackup_" + str(count) + ".yaml"
+    #         with open(newfile, "w+") as nf:
+    #             yaml.dump(a, nf)
 
     def makedirs(self):
         for d in self.dirlist:
             if not os.path.isdir(d):
                 os.makedirs(d)
 
+    # def UserCredsBackup(self):
+    #     allcreds = db.user_creds.find({}, {"_id": 0})
+    #     #self.createpages(allcreds, self.p2)
 
     def MainBackup(self):
         allmain = db.main.find({}, {"_id": 0})
-        cmx = AT.CreateMyXML()
         count = 0
         for a in allmain:
             print("THIS IS A FROM ALLMAIN")
             print(a)
-            dataxml = cmx.CreateMainXML(a)
+            dataxml = CMXML.CreateMainXML(a)
             count += 1
             newfile2 = self.p1 + "/ampBackup_" + str(count) + ".xml"
             with open(newfile2, "w+") as nff:
                 for d in dataxml:
                     nff.writelines(d)
 
-       
-
-    def UserCredsBackup(self):
-        allcreds = db.user_creds.find({}, {"_id": 0})
-        self.createpages(allcreds, self.p2)
-
     def ArtAlphaBackup(self):
         allartalpha = viewsdb.artalpha.find({}, {"_id": 0})
-        self.createpages(allartalpha, self.p3)
+        count  = 0
+        for a in allartalpha:
+            dataxml = CMXML.CreateArtAlphaXML(a)
+            count += 1
+            newfile = self.p3 + "/ampBackup_" + str(count) + ".xml"
+            with open(newfile, "w+") as nff:
+                for d in dataxml:
+                    nff.writelines(d)
 
     def AlbAlphaBackup(self):
         allalbalpha = viewsdb.albalpha.find({}, {"_id": 0})
-        self.createpages(allalbalpha, self.p4)
+        count = 0
+        for a in allalbalpha:
+            dataxml = CMXML.CreateAlbAlphaXML(a)
+            count += 1
+            newfile = self.p4 + "/ampBackup_" + str(count) + ".xml"
+            with open(newfile, "w+") as nff:
+                for d in dataxml:
+                    nff.writelines(d)
 
     def SongAlphaBackup(self):
         allsongalpha = viewsdb.songalpha.find({}, {"_id": 0})
-        self.createpages(allsongalpha, self.p5)
+        count = 0
+        for a in allsongalpha:
+            dataxml = CMXML.CreateSongAlphaXML(a)
+            count += 1
+            newfile = self.p5 + "/ampBackup_" + str(count) + ".xml"
+            with open(newfile, "w+") as nff:
+                for d in dataxml:
+                    nff.writelines(d)
 
     def ArtViewBackup(self):
         allartview = viewsdb.artistView.find({}, {"_id": 0})
-        self.createpages(allartview, self.p6)
+        count = 0
+        for a in allartview:
+            dataxml = CMXML.CreatArtistViewXML(a)
+            count += 1
+            newfile = self.p6 + "/ampBackup_" + str(count) + ".xml"
+            with open(newfile, "w+") as nff:
+                for d in dataxml:
+                    nff.writelines(d)
 
     def AlbViewBackup(self):
         allalbview = viewsdb.albumView.find({}, {"_id": 0})
-        self.createpages(allalbview, self.p7)
+        count = 0
+        for a in allalbview:
+            dataxml = CMXML.CreatAlbumViewXML(a)
+            count += 1
+            newfile = self.p7 + "/ampBackup_" + str(count) + ".xml"
+            with open(newfile, "w+") as nff:
+                for d in dataxml:
+                    nff.writelines(d)
 
     def SongViewBackup(self):
         allsongview = viewsdb.songView.find({}, {"_id": 0})
-        self.createpages(allsongview, self.p8)
+        count = 0
+        for a in allsongview:
+            dataxml = CMXML.CreateSongViewXML(a)
+            count += 1
+            newfile = self.p8 + "/ampBackup_" + str(count) + ".xml"
+            with open(newfile, "w+") as nff:
+                for d in dataxml:
+                    nff.writelines(d)
+        #self.createpages(allsongview, )
 
     def PicBackup(self):
         allpics = pdb.pics.find({}, {"_id": 0})
-        self.createpages(allpics, self.p9)
+        count = 0
+        for a in allpics:
+            dataxml = CMXML.CreatePicsXML(a)
+            count += 1
+            newfile = self.p9 + "/ampBackup_" + str(count) + ".xml"
+            with open(newfile, "w+") as nff:
+                for d in dataxml:
+                    nff.writelines(d)
 
     def CreateAllBackups(self):
         self.makedirs()
         self.MainBackup()
-        self.UserCredsBackup()
+        # self.UserCredsBackup()
         self.ArtAlphaBackup()
         self.AlbAlphaBackup()
         self.SongAlphaBackup()

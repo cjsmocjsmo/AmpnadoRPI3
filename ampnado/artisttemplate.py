@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 
 class CreateMyXML:
+    def __init__(self):
+        self.m1 = """<?xml version="1.0" encoding="UTF-8" standalone="yes" ?> \n"""
 
     def CreateMainXML(self, data):
-        m1 = """<?xml version="1.0" encoding="UTF-8" standalone="yes" ?> \n"""
         m2 = "<main> \n"
         m3 = "\t <Filename>{}</Filename> \n".format(data["Filename"])
         m4 = "\t <Extension>{}</Extension> \n".format(data["Extension"])
@@ -18,12 +19,114 @@ class CreateMyXML:
         m13 = "\t <AlbumId>{}</lbumId> \n".format(data["AlbumId"])
         m14 = "\t <HttpMusicPath>{}</HttpMusicPath> \n".format(data["HttpMusicPath"])
         m15 = "</main> \n"
-        mainXML = [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15]
+        mainXML = [
+            self.m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15,
+        ]
         return mainXML
-# albalpha
-# { "_id" : ObjectId("5fa08dff7bd25100016b189f"), "albalpha" : [ "1" ] }
 
-#
+    def CreatAlbumViewXML(self, data):
+        # albumView
+        av2 = "<AlbumView> \n"
+        av3 = "\t <Artist>{}</Artist> \n".format(data["Artist"])
+        av4 = "\t <Album>{}</Album> \n".format(data["Album"])
+        av5 = "\t <ArtistId>{}</ArtistId> \n".format(data["ArtistId"])
+        av6 = "\t <AlbumId>{}</AlbumId> \n".format(data["AlbumId"])
+        av7 = "\t <AlbumArtHttpPath>{}</AlbumArtHttpPath> \n".format(data["AlbumArtHttpPath"])
+        av8 = "\t <NumSongs>{}</NumSongs> \n".format(data["NumSongs"])
+        av9 = "\t <Page>{}</Page> \n".format(data["Page"])
+        av10 = "\t <Songs>"
+        albumViewXML = [
+            self.m1, av2, av3, av4, av5, av6, av7, av8, av9, av10,
+        ]
+        for s in data["Songs"]:
+            av11 = "\t\t <Songname>{}</Songname> \n".format(s[0])
+            albumViewXML.append(av11)
+            av12 = "\t\t <SongId>{}</SongId> \n".format(s[0])
+            albumViewXML.append(av12)
+        albumViewXML.append("\t </Songs> \n")
+        albumViewXML.append("</AlbumView> \n")
+        return albumViewXML
 
+    def CreatArtistViewXML(self, data):
+        #artistView
+        a2 = "<ArtistView> \n"
+        a3 = "\t <Artist>{}</Artist> \n".format(data["Artist"])
+        a4 = "\t <ArtistId>{}</ArtistId> \n".format(data["ArtistId"])
+        a5 = "\t <Page>{}</Page> \n".format(data["Page"])
+        a6 = "\t <Albums> \n"
+        artistViewXML = [self.m1, a2, a3, a4, a5, a6]
+        for a in data["Albums"]:
+            a7 = "\t <Album>{}</Album> \n".format(a[0])
+            artistViewXML.append(a7)
+            a8 = "\t <AlbumId>{}</AlbumId> \n".format(a[1])
+            artistViewXML.append(a8)
+        a9 = "\t </Albums> \n"
+        artistViewXML.append(a9)
+        a10 = "</ArtistView> \n"
+        artistViewXML.append(a10)
+        return artistViewXML
 
+    def CreateSongViewXML(self, data):
+        #songView
+        a2 = "<SongView> \n"
+        a3 = "\t <Page>{}</Page> \n".format(data["Page"])
+        a4 = "\t <Song>{}</Song> \n".format(data["Song"])
+        a5 = "\t <SongId>{}</SongId> \n".format(data["SongId"])
+        a6 = "\t <Artist>{}</Artist> \n".format(data["Artist"])
+        a7 = "</SongView> \n"
+        songviewxml = [self.m1, a2, a3, a4, a5, a6, a7]
+        return songviewxml
 
+    def CreatePicsXML(self, data):
+        #pics
+        a1 = "<Pics>"
+        a2 = "\t <PicId>{}</PicId> \n".format(data["PicId"])
+        a3 = "\t <DirPath>{}</DirPath> \n".format(data["DirPath"])
+        a4 = "\t <NewPicPath>{}</NewPicPath> \n".format(data["NewPicPath"])
+        a5 = "\t <AlbumArtHttpPath>{}</AlbumArtHttpPath> \n".format(data["AlbumArtHttpPath"])
+        a6 = "\t <PicPath>{}</PicPath> \n".format(data["PicPath"])
+        a7 = "\t <ext>{}</ext> \n".format(data["ext"])
+        a8 = "\t <AlbumArtSize>{}</AlbumArtSize> \n".format(data["AlbumArtSize"])
+        a9 = "\t <mp3glob> \n"
+        picsXML = [self.m1, a1, a2, a3, a4, a5, a6, a7, a8, a9]
+        for s in data["mp3glob"]:
+            a10 = "\t\t <item>{}</item> \n".format(s)
+            picsXML.append(a10)
+        a11 = "\t </mp3glob> \n"
+        picsXML.append(a11)
+        a12 = "</Pics> \n"
+        picsXML.append(a12)
+        return picsXML
+
+    def CreateArtAlphaXML(self, data):
+        #artalpha
+        a1 = "<ArtAlpha> \n"
+        artalphaXML = [self.m1, a1]
+        for s in data["artalpha"]:
+            a2 = "\t <item>{}</item> \n".format(s)
+            artalphaXML.append(a2)
+        a3 = "</ArtAlpha>"
+        artalphaXML.append(a3)
+        return artalphaXML
+
+    def CreateAlbAlphaXML(self, data):
+        #artalpha
+        a1 = "<AlbAlpha> \n"
+        albalphaXML = [self.m1, a1]
+        for s in data["albalpha"]:
+            a2 = "\t <item>{}</item> \n".format(s)
+            albalphaXML.append(a2)
+        a3 = "</AlbAlpha>"
+        albalphaXML.append(a3)
+        return albalphaXML
+
+    def CreateSongAlphaXML(self, data):
+        #artalpha
+        a1 = "<SongAlpha> \n"
+        songalphaXML = [self.m1, a1]
+        for s in data["songalpha"]:
+            a2 = "\t <item>{}</item> \n".format(s)
+            songalphaXML.append(a2)
+        a3 = "</AlbAlpha> \n"
+        songalphaXML.append(a3)
+        return songalphaXML
