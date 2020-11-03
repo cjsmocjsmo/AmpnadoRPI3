@@ -57,5 +57,5 @@ volumes:
     driver_opts:
       type: none
 #THIS NEEDS TO BE CHANGE TO THE CORRECT PATH ON THE PI
-      device: /home/AmpBackup
+      device: /home/pi/AmpBackup
       o: bind
