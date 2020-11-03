@@ -90,14 +90,11 @@ class CreateBackups:
         count = 0
         for a in aitem:
             count += 1
-            # newfile = addr + "/ampBackup_" + str(count) + ".yaml"
-            # with open(newfile, "w+") as nf:
-            #     yaml.dump(a, nf)
-
+            data = at.CreateMainXML(a)
             newfile2 = addr + "/ampBackup_" + str(count) + ".xml"
             with open(newfile2, "w+") as nff:
-                data = at.CreateMainXML(a)
-                nff.write(data)
+                for d in data:
+                    nff.writelines(d)
 
     def makedirs(self):
         for d in self.dirlist:
@@ -106,9 +103,6 @@ class CreateBackups:
 
     def MainBackup(self):
         allmain = db.main.find({}, {"_id": 0})
-        for a in allmain:
-            print("THIS IS ALLMAIN ALLMAIN:")
-            print(a)
         self.createMainXmlPages(allmain, self.p1)
 
     def UserCredsBackup(self):
