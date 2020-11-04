@@ -26,7 +26,7 @@ from pymongo import MongoClient
 from pprint import pprint
 from data import Data
 import backup as BUP
-import parsexml
+import parsexml PXML
 
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
 VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
@@ -108,7 +108,7 @@ class SetUp():
 		ckfile = "/usr/share/Ampnado/AmpBackup/ampnadoDB/main/ampBackup_1.xml"
 		if os.path.isfile(ckfile):
 			
-			boo = ParseMyXML()
+			boo = PXML.ParseMyXML()
 			boo.parseAllXML()
 		elif not bdirs.checkbdir():
 			os.mkdir("/usr/share/Ampnado/AmpBackup")
