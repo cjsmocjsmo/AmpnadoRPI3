@@ -26,7 +26,7 @@ from pymongo import MongoClient
 from pprint import pprint
 from data import Data
 import backup as BUP
-import parsexml PXML
+import parsexml as PXML
 
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
 VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
