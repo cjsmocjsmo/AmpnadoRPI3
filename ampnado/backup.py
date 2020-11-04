@@ -182,6 +182,8 @@ class CreateBackups:
             dataxml = CMXML.CreatePicsXML(a)
             count += 1
             newfile = self.p9 + "/ampBackup_" + str(count) + ".xml"
+            print("PRINTING TO FILE:")
+            print(newfile)
             with open(newfile, "w+") as nff:
                 for d in dataxml:
                     nff.writelines(d)
