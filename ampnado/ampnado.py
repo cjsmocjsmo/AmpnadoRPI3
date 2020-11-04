@@ -26,11 +26,11 @@ from pymongo import MongoClient
 from pprint import pprint
 from data import Data
 import backup as BUP
+import parsexml
 
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
 VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
 PICDB_ADDR = os.environ['AMP_PICDB_ADDR']
-
 
 ampDBClient = MongoClient(MONGO_ADDR)
 ampDBClient.drop_database("ampnadoDB")
@@ -51,7 +51,6 @@ class SetUp():
 		self.FUN = FUN
 		FUNKY = fun.Functions()
 		FUNKY.insert_user(os.environ["AMP_USERNAME"], os.environ["AMP_PASSWORD"])
-
 
 	def gettime(self, at): return (time.time() - at)
 
@@ -105,13 +104,16 @@ class SetUp():
 		print("Songview time %s" % songviewtime)
 
 		bdirs = BUP.CreateBackupDirs()
-		if not os.path.isdir("/home/AmpBackups"):
-			os.mkdir("/home/AmpBackups")
-		if not bdirs.checkbdir():
-			bdirs.createbdir()
-
 		backup = BUP.CreateBackups()
-		backup.CreateAllBackups()
+		ckfile = "/usr/share/Ampnado/AmpBackup/ampnadoDB/main/ampBackup_1.xml"
+		if os.path.isfile(ckfile):
+			
+			boo = ParseMyXML()
+			boo.parseAllXML()
+		elif not bdirs.checkbdir():
+			os.mkdir("/usr/share/Ampnado/AmpBackup")
+			bdirs.createbdir()
+			backup.CreateAllBackups()
 
 
 		# from functions import Indexes

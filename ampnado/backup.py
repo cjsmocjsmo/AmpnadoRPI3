@@ -77,22 +77,10 @@ class CreateBackups:
             self.p5, self.p6, self.p7, self.p8, self.p9
         ]
 
-    # def createpages(self, aitem, addr):
-    #     count = 0
-    #     for a in aitem:
-    #         count += 1
-    #         newfile = addr + "/ampBackup_" + str(count) + ".yaml"
-    #         with open(newfile, "w+") as nf:
-    #             yaml.dump(a, nf)
-
     def makedirs(self):
         for d in self.dirlist:
             if not os.path.isdir(d):
                 os.makedirs(d)
-
-    # def UserCredsBackup(self):
-    #     allcreds = db.user_creds.find({}, {"_id": 0})
-    #     #self.createpages(allcreds, self.p2)
 
     def MainBackup(self):
         allmain = db.main.find({}, {"_id": 0})
@@ -171,14 +159,11 @@ class CreateBackups:
             with open(newfile, "w+") as nff:
                 for d in dataxml:
                     nff.writelines(d)
-        #self.createpages(allsongview, )
 
     def PicBackup(self):
         allpics = pdb.pics.find({}, {"_id": 0})
         count = 0
         for a in allpics:
-            print("THIS IS A FROM ALLPICS")
-            print(a)
             dataxml = CMXML.CreatePicsXML(a)
             count += 1
             newfile = self.p9 + "/ampBackup_" + str(count) + ".xml"
@@ -191,7 +176,6 @@ class CreateBackups:
     def CreateAllBackups(self):
         self.makedirs()
         self.MainBackup()
-        # self.UserCredsBackup()
         self.ArtAlphaBackup()
         self.AlbAlphaBackup()
         self.SongAlphaBackup()
@@ -203,7 +187,3 @@ class CreateBackups:
     def DelAllBackups(self):
         shutil.rmtree(BDIR)
 
-# if __name__ == "__main__":
-#     dbb = CreateBackupDirs()
-#     if not dbb.checkbdir():
-#         dbb.createbdir()
