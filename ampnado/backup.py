@@ -5,7 +5,7 @@ import shutil
 import pymongo
 import artisttemplate as AT
 
-BDIR = "/usr/share/Ampnado/AmpBackups"
+BDIR = "/usr/share/Ampnado/AmpBackup"
 
 class CreateBackupDirs:
     def __init__(self):
