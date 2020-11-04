@@ -36,7 +36,7 @@ services:
       - 6795:6795
     volumes:
       - ampnadorpivol:/usr/share/Ampnado/Music
-      - ampnadorpibackupvol:/home/pi/AmpBackup
+      - ampnadorpibackupvol:/usr/share/Ampnado/AmpBackup
     depends_on:
       - db
 

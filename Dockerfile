@@ -1,8 +1,9 @@
 FROM amp-build-deps:latest
 
 RUN \
-	mkdir /usr/share/Ampnado && \
-	chmod -R 0755 /usr/share/Ampnado
+	mkdir -p /usr/share/Ampnado/AmpBackup && \
+	chmod -R 0755 /usr/share/Ampnado && \
+	chmod -R 0755 /usr/share/Ampnado/AmpBackup
 
 COPY ampnado /usr/share/Ampnado
 
