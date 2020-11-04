@@ -40,8 +40,8 @@ class ParseMyXML:
                 clubs.update({child.tag:child.text})
                 mlist.append(clubs)
         print(mlist)
-        # for a in aalist:
-        #     viewsdb.albalpha.insert(a)
+        for m in mlist:
+            viewsdb.albalpha.insert(m)
 
     def parseArtViewXML(self):
         arvglob = glob.glob(self.artview)
@@ -54,8 +54,8 @@ class ParseMyXML:
                 spades.update({child.tag:child.text})
                 arvlist.append(spades)
         print(arvlist)
-        # for a in aalist:
-        #     viewsdb.albalpha.insert(a)
+        for a in arvlist:
+            viewsdb.albalpha.insert(a)
 
     def parseAlbViewXML(self):
         avglob = glob.glob(self.albview)
@@ -68,8 +68,8 @@ class ParseMyXML:
                 clubs.update({child.tag:child.text})
                 avlist.append(clubs)
         print(avlist)
-        # for a in aalist:
-        #     viewsdb.albalpha.insert(a)
+        for a in avlist:
+            viewsdb.albalpha.insert(a)
 
     def parseSongViewXML(self):
         svglob = glob.glob(self.songview)
@@ -82,8 +82,8 @@ class ParseMyXML:
                 hearts.update({child.tag:child.text})
                 svlist.append(hearts)
         print(svlist)
-        # for a in aalist:
-        #     viewsdb.albalpha.insert(a)
+        for a in svlist:
+            viewsdb.albalpha.insert(a)
 
     def parseArtAlphaXML(self):
         arglob = glob.glob(self.artalpha)
@@ -96,8 +96,8 @@ class ParseMyXML:
                 diamonds.update({child.tag:child.text})
                 arlist.append(diamonds)
         print(arlist)
-        # for a in aalist:
-        #     viewsdb.albalpha.insert(a)
+        for a in arlist:
+            viewsdb.albalpha.insert(a)
 
     def parseAlbAlphaXML(self):
         aaglob = glob.glob(self.albalpha)
@@ -110,8 +110,8 @@ class ParseMyXML:
                 spades.update({child.tag:child.text})
                 aalist.append(spades)
         print(aalist)
-        # for a in aalist:
-        #     viewsdb.albalpha.insert(a)
+        for a in aalist:
+            viewsdb.albalpha.insert(a)
 
     def parseSongAlphaXML(self):
         saglob = glob.glob(self.songalpha)
@@ -124,8 +124,8 @@ class ParseMyXML:
                 club.update({child.tag:child.text})
                 salist.append(club)
         print(salist)
-        # for s in salist:
-        #     viewsdb.songalpha.insert(s)
+        for s in salist:
+            viewsdb.songalpha.insert(s)
 
     def parsePicsXML(self):
         picglob = glob.glob(self.picdir)
@@ -138,8 +138,8 @@ class ParseMyXML:
                 ace.update({child.tag:child.text})
                 piclist.append(ace)
         print(piclist)
-        # for m in piclist:
-        #     pdb.pics.insert(m)
+        for m in piclist:
+            pdb.pics.insert(m)
 
     def parseAllXML(self):
         self.parseMainXML()
@@ -153,11 +153,5 @@ class ParseMyXML:
 
 if __name__ == "__main__":
     pmx = ParseMyXML()
-    pmx.parseMainXML()
-    pmx.parseArtViewXML()
-    pmx.parseAlbViewXML()
-    pmx.parseSongViewXML()
-    pmx.parseArtAlphaXML()
-    pmx.parseAlbAlphaXML()
-    pmx.parseSongAlphaXML()
-    pmx.parsePicsXML()
+    pmx.parseAllXML()
+    

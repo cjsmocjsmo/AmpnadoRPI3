@@ -52,6 +52,7 @@ class SetUp():
 		FUNKY = fun.Functions()
 		FUNKY.insert_user(os.environ["AMP_USERNAME"], os.environ["AMP_PASSWORD"])
 
+
 	def gettime(self, at): return (time.time() - at)
 
 	def main(self):
@@ -103,14 +104,12 @@ class SetUp():
 		songviewtime = gtime - atime
 		print("Songview time %s" % songviewtime)
 
+
+
+
 		bdirs = BUP.CreateBackupDirs()
 		backup = BUP.CreateBackups()
-		ckfile = "/usr/share/Ampnado/AmpBackup/ampnadoDB/main/ampBackup_1.xml"
-		if os.path.isfile(ckfile):
-			
-			boo = PXML.ParseMyXML()
-			boo.parseAllXML()
-		elif not bdirs.checkbdir():
+		if not bdirs.checkbdir():
 			os.mkdir("/usr/share/Ampnado/AmpBackup")
 			bdirs.createbdir()
 			backup.CreateAllBackups()
@@ -149,7 +148,12 @@ class SetUp():
 		print("SETUP HAS BEEN COMPLETED IN %s SECONDS" % t)
 
 if __name__ == "__main__":
-	su = SetUp()
-	su.main()
+	ckfile = "/usr/share/Ampnado/AmpBackup/ampnadoDB/main/ampBackup_1.xml"
+	if os.path.isfile(ckfile):
+		boo = PXML.ParseMyXML()
+		boo.parseAllXML()
+	else:
+		su = SetUp()
+		su.main()
 	import ampserver as app
 	app.main()
