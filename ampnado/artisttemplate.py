@@ -131,6 +131,6 @@ class CreateMyXML:
         for s in data["songalpha"]:
             a2 = "\t <item>{}</item> \n".format(s)
             songalphaXML.append(a2)
-        a3 = "</AlbAlpha> \n"
+        a3 = "</SongAlpha> \n"
         songalphaXML.append(a3)
         return songalphaXML
