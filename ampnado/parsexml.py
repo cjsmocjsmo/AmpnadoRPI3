@@ -63,8 +63,11 @@ class ParseMyXML:
         print(clist)
         for c in clist:
             print("inserting main record")
-            db.user_creds.insert(c)
-
+            try:
+                db.user_creds.insert(c)
+            except pymongo.errors.DuplicateKeyError:
+                print(c)
+                pass
 
     def parseArtViewXML(self):
         arvglob = glob.glob(self.artview)
