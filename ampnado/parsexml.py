@@ -3,20 +3,32 @@
 import os
 import glob
 import pymongo
+from pymongo import MongoClient
 import xml.etree.ElementTree as ET
 
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
 VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
 PICDB_ADDR = os.environ['AMP_PICDB_ADDR']
 
-ampDBClient = pymongo.MongoClient(MONGO_ADDR)
+# ampDBClient = pymongo.MongoClient(MONGO_ADDR)
+# db = ampDBClient.ampnadoDB
+
+# ampVDBClient = pymongo.MongoClient(VIEWSDB_ADDR)
+# viewsdb = ampVDBClient.ampviewsDB
+
+# ampPDBClient = pymongo.MongoClient(PICDB_ADDR)
+# pdb = ampPDBClient.picdb
+ampDBClient = MongoClient(MONGO_ADDR)
+ampDBClient.drop_database("ampnadoDB")
 db = ampDBClient.ampnadoDB
 
-ampVDBClient = pymongo.MongoClient(VIEWSDB_ADDR)
-viewsdb = ampVDBClient.ampviewsDB
+ampvDBClient = MongoClient(VIEWSDB_ADDR)
+ampvDBClient.drop_database("ampviewsDB")
+viewsdb = ampvDBClient.ampviewsDB
 
-ampPDBClient = pymongo.MongoClient(PICDB_ADDR)
-pdb = ampPDBClient.picdb
+picDBClient = MongoClient(PICDB_ADDR)
+picDBClient.drop_database("picdb")
+pdb = picDBClient.picdb
 
 class ParseMyXML:
     def __init__(self):
@@ -82,7 +94,11 @@ class ParseMyXML:
         print(arvlist)
         for a in arvlist:
             print("inserting in to artview")
-            viewsdb.albalpha.insert(a)
+            try:
+                viewsdb.albalpha.insert(a)
+            except pymongo.errors.DuplicateKeyError:
+                print(a)
+                pass
 
     def parseAlbViewXML(self):
         avglob = glob.glob(self.albview)
@@ -97,7 +113,11 @@ class ParseMyXML:
         print(avlist)
         for a in avlist:
             print("inserting insto albumview")
-            viewsdb.albalpha.insert(a)
+            try:
+                viewsdb.albalpha.insert(a)
+            except pymongo.errors.DuplicateKeyError:
+                print(a)
+                pass
 
     def parseSongViewXML(self):
         svglob = glob.glob(self.songview)
@@ -111,7 +131,11 @@ class ParseMyXML:
                 svlist.append(hearts)
         print(svlist)
         for a in svlist:
-            viewsdb.albalpha.insert(a)
+            try:
+                viewsdb.albalpha.insert(a)
+            except pymongo.errors.DuplicateKeyError:
+                print(a)
+                pass
 
     def parseArtAlphaXML(self):
         arglob = glob.glob(self.artalpha)
@@ -125,7 +149,11 @@ class ParseMyXML:
                 arlist.append(diamonds)
         print(arlist)
         for a in arlist:
-            viewsdb.albalpha.insert(a)
+            try:
+                viewsdb.albalpha.insert(a)
+            except pymongo.errors.DuplicateKeyError:
+                print(a)
+                pass
 
     def parseAlbAlphaXML(self):
         aaglob = glob.glob(self.albalpha)
@@ -139,7 +167,11 @@ class ParseMyXML:
                 aalist.append(spades)
         print(aalist)
         for a in aalist:
-            viewsdb.albalpha.insert(a)
+            try:
+                viewsdb.albalpha.insert(a)
+            except pymongo.errors.DuplicateKeyError:
+                print(a)
+                pass
 
     def parseSongAlphaXML(self):
         saglob = glob.glob(self.songalpha)
@@ -153,7 +185,11 @@ class ParseMyXML:
                 salist.append(club)
         print(salist)
         for s in salist:
-            viewsdb.songalpha.insert(s)
+            try:
+                viewsdb.songalpha.insert(s)
+            except pymongo.errors.DuplicateKeyError:
+                print(s)
+                pass
 
     def parsePicsXML(self):
         picglob = glob.glob(self.picdir)
@@ -167,7 +203,11 @@ class ParseMyXML:
                 piclist.append(ace)
         print(piclist)
         for m in piclist:
-            pdb.pics.insert(m)
+            try:
+                pdb.pics.insert(m)
+            except pymongo.errors.DuplicateKeyError:
+                print(m)
+                pass
 
     def parseAllXML(self):
         print("STARTING PARSEALLXML")

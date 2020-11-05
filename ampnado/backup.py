@@ -2,7 +2,7 @@
 import os
 import glob
 import shutil
-import pymongo
+from pymongo import MongoClient
 import artisttemplate as AT
 
 BDIR = "/usr/share/Ampnado/AmpBackup"
@@ -42,14 +42,29 @@ MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
 VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
 PICDB_ADDR = os.environ['AMP_PICDB_ADDR']
 
-ampDBClient = pymongo.MongoClient(MONGO_ADDR)
+
+ampDBClient = MongoClient(MONGO_ADDR)
+ampDBClient.drop_database("ampnadoDB")
 db = ampDBClient.ampnadoDB
 
-ampVDBClient = pymongo.MongoClient(VIEWSDB_ADDR)
-viewsdb = ampVDBClient.ampviewsDB
+ampvDBClient = MongoClient(VIEWSDB_ADDR)
+ampvDBClient.drop_database("ampviewsDB")
+viewsdb = ampvDBClient.ampviewsDB
 
-ampPDBClient = pymongo.MongoClient(PICDB_ADDR)
-pdb = ampPDBClient.picdb
+
+picDBClient = MongoClient(PICDB_ADDR)
+picDBClient.drop_database("picdb")
+pdb = picDBClient.picdb
+
+#client.drop_database("config")
+# ampDBClient = pymongo.MongoClient(MONGO_ADDR)
+# db = ampDBClient.ampnadoDB
+
+# ampVDBClient = pymongo.MongoClient(VIEWSDB_ADDR)
+# viewsdb = ampVDBClient.ampviewsDB
+
+# ampPDBClient = pymongo.MongoClient(PICDB_ADDR)
+# pdb = ampPDBClient.picdb
 
 CMXML = AT.CreateMyXML()
 
