@@ -26,7 +26,7 @@ from pymongo import MongoClient
 from pprint import pprint
 from data import Data
 import backup as BUP
-import parsexml as PXML
+import parsexml
 
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
 VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
@@ -61,14 +61,14 @@ class SetUp():
 		#self.set_env_vars()
 
 
-
+		print("STARTING MAIN")
 		ckfile = "/usr/share/Ampnado/AmpBackup/ampnadoDB/main/ampBackup_1.xml"
 		if os.path.isfile(ckfile):
-			boo = PXML.ParseMyXML()
+			boo = parsexml.ParseMyXML()
 			print('STARTING PARSE XML')
 			boo.parseAllXML()
 		else:
-
+			print("THIS IS ELSE BLOCK")
 			self.FUN.find_music(os.environ["AMP_MEDIA_PATH"])
 			
 			FJ = fj.FindMissingArt()
