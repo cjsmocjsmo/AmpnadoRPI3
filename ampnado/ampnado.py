@@ -108,11 +108,9 @@ class SetUp():
 
 
 		bdirs = BUP.CreateBackupDirs()
+		bdirs.createbdir()
 		backup = BUP.CreateBackups()
-		if not bdirs.checkbdir():
-			os.mkdir("/usr/share/Ampnado/AmpBackup")
-			bdirs.createbdir()
-			backup.CreateAllBackups()
+		backup.CreateAllBackups()
 
 
 		# from functions import Indexes

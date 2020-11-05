@@ -10,16 +10,15 @@ BDIR = "/usr/share/Ampnado/AmpBackup"
 class CreateBackupDirs:
     def __init__(self):
         self.ampPaths = [
-            "/ampnadoDB", "/ampnadoDB/main", "/ampnadoDB/user_creds"
-            "/ampviewsDB", "/ampviewsDB/artalpha", "/ampviewsDB/albalpha"
-            "/ampviewsDB/songalpha", "/ampviewsDB/artistView", "/ampviewsDB/albumView"
-            "/ampviewsDB/songView", "/picdb/pics"
+            "/ampnadoDB/main", "/ampnadoDB/user_creds", "/ampviewsDB/artalpha", 
+            "/ampviewsDB/albalpha", "/ampviewsDB/songalpha", "/ampviewsDB/artistView", 
+            "/ampviewsDB/albumView", "/ampviewsDB/songView", "/picdb/pics"
         ]
 
-    def checkbdir(self):
-        if os.path.isdir(BDIR):
-            return True
-        return False
+    # def checkbdir(self):
+    #     if os.path.isdir(BDIR):
+    #         return True
+    #     return False
 
     def createbdir(self):
         for a in self.ampPaths:
