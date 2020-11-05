@@ -37,6 +37,7 @@ services:
     volumes:
       - ampnadorpivol:/usr/share/Ampnado/Music
       - ampnadorpibackupvol:/usr/share/Ampnado/AmpBackup
+      - ampnadorpipicvol:/usr/share/Ampnado/static/images/thumbnails
     depends_on:
       - db
 
@@ -58,4 +59,11 @@ volumes:
       type: none
 #THIS NEEDS TO BE CHANGE TO THE CORRECT PATH ON THE PI
       device: /home/pi/AmpBackup
+      o: bind
+
+  ampnadorpipicvol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/pi/Thumbnails
       o: bind
