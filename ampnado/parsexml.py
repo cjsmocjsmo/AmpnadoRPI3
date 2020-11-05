@@ -53,13 +53,10 @@ class ParseMyXML:
             for child in root:
                 clubs.update({child.tag:child.text})
                 mlist.append(clubs)
-        print(mlist)
         for m in mlist:
-            print("inserting main record")
             try:
                 db.main.insert(m)
             except pymongo.errors.DuplicateKeyError:
-                print(m)
                 pass
 
     def parseCredsXML(self):
@@ -72,13 +69,10 @@ class ParseMyXML:
             for child in root:
                 spades.update({child.tag:child.text})
                 clist.append(spades)
-        print(clist)
         for c in clist:
-            print("inserting main record")
             try:
                 db.user_creds.insert(c)
             except pymongo.errors.DuplicateKeyError:
-                print(c)
                 pass
 
     def parseArtViewXML(self):
@@ -91,13 +85,10 @@ class ParseMyXML:
             for child in root:
                 spades.update({child.tag:child.text})
                 arvlist.append(spades)
-        print(arvlist)
         for a in arvlist:
-            print("inserting in to artview")
             try:
                 viewsdb.albalpha.insert(a)
             except pymongo.errors.DuplicateKeyError:
-                print(a)
                 pass
 
     def parseAlbViewXML(self):
@@ -112,11 +103,9 @@ class ParseMyXML:
                 avlist.append(clubs)
         print(avlist)
         for a in avlist:
-            print("inserting insto albumview")
             try:
                 viewsdb.albalpha.insert(a)
             except pymongo.errors.DuplicateKeyError:
-                print(a)
                 pass
 
     def parseSongViewXML(self):
@@ -129,12 +118,10 @@ class ParseMyXML:
             for child in root:
                 hearts.update({child.tag:child.text})
                 svlist.append(hearts)
-        print(svlist)
         for a in svlist:
             try:
                 viewsdb.albalpha.insert(a)
             except pymongo.errors.DuplicateKeyError:
-                print(a)
                 pass
 
     def parseArtAlphaXML(self):
@@ -145,13 +132,13 @@ class ParseMyXML:
             diamonds = []
             for child in root:
                 diamonds.append(child.text)
-            bar = {"artalpha": diamonds}
-
-            try:
-                viewsdb.albalpha.insert(bar)
-            except pymongo.errors.DuplicateKeyError:
-                print(bar)
-                pass
+        bar = {"artalpha": diamonds}
+        print('THIS IS ART ALPHA')
+        print(bar)
+        try:
+            viewsdb.albalpha.insert(bar)
+        except pymongo.errors.DuplicateKeyError:
+            pass
 
     def parseAlbAlphaXML(self):
         aaglob = glob.glob(self.albalpha)
@@ -162,12 +149,13 @@ class ParseMyXML:
             spades = []
             for child in root:
                 spades.append(child.text)
-            foo = {"albalpha": spades}
-            try:
-                viewsdb.albalpha.insert(foo)
-            except pymongo.errors.DuplicateKeyError:
-                print(foo)
-                pass
+        foo = {"albalpha": spades}
+        print('THIS IS ALB ALPHA')
+        print(foo)
+        try:
+            viewsdb.albalpha.insert(foo)
+        except pymongo.errors.DuplicateKeyError:
+            pass
 
     def parseSongAlphaXML(self):
         saglob = glob.glob(self.songalpha)
@@ -177,12 +165,13 @@ class ParseMyXML:
             club = []
             for child in root:
                 club.append(child.text)
-            zoo = {"songalpha": club}
-            try:
-                viewsdb.songalpha.insert(zoo)
-            except pymongo.errors.DuplicateKeyError:
-                print(zoo)
-                pass
+        zoo = {"songalpha": club}
+        print('THIS IS SONG ALPHA')
+        print(zoo)
+        try:
+            viewsdb.songalpha.insert(zoo)
+        except pymongo.errors.DuplicateKeyError:
+            pass
 
     def parsePicsXML(self):
         picglob = glob.glob(self.picdir)
@@ -194,12 +183,10 @@ class ParseMyXML:
             for child in root:
                 ace.update({child.tag:child.text})
                 piclist.append(ace)
-        print(piclist)
         for m in piclist:
             try:
                 pdb.pics.insert(m)
             except pymongo.errors.DuplicateKeyError:
-                print(m)
                 pass
 
     def parseAllXML(self):
