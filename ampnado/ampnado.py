@@ -33,14 +33,14 @@ VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
 PICDB_ADDR = os.environ['AMP_PICDB_ADDR']
 
 ampDBClient = MongoClient(MONGO_ADDR)
-# ampDBClient.drop_database("ampnadoDB")
+ampDBClient.drop_database("ampnadoDB")
 
 ampvDBClient = MongoClient(VIEWSDB_ADDR)
-# ampvDBClient.drop_database("ampviewsDB")
+ampvDBClient.drop_database("ampviewsDB")
 #client.drop_database("config")
 
 picDBClient = MongoClient(PICDB_ADDR)
-# picDBClient.drop_database("picdb")
+picDBClient.drop_database("picdb")
 
 db = ampDBClient.ampnadoDB
 
