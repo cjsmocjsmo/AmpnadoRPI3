@@ -139,56 +139,49 @@ class ParseMyXML:
 
     def parseArtAlphaXML(self):
         arglob = glob.glob(self.artalpha)
-        arlist = []
         for ar in arglob:
             tree = ET.parse(ar)
             root = tree.getroot()
-            diamonds = {}
+            diamonds = []
             for child in root:
-                diamonds.update({child.tag:child.text})
-                arlist.append(diamonds)
-        print(arlist)
-        for a in arlist:
+                diamonds.append(child.text)
+            bar = {"artalpha": diamonds}
+
             try:
-                viewsdb.albalpha.insert(a)
+                viewsdb.albalpha.insert(bar)
             except pymongo.errors.DuplicateKeyError:
-                print(a)
+                print(bar)
                 pass
 
     def parseAlbAlphaXML(self):
         aaglob = glob.glob(self.albalpha)
-        aalist = []
+
         for aa in aaglob:
             tree = ET.parse(aa)
             root = tree.getroot()
-            spades = {}
+            spades = []
             for child in root:
-                spades.update({child.tag:child.text})
-                aalist.append(spades)
-        print(aalist)
-        for a in aalist:
+                spades.append(child.text)
+            foo = {"albalpha": spades}
             try:
-                viewsdb.albalpha.insert(a)
+                viewsdb.albalpha.insert(foo)
             except pymongo.errors.DuplicateKeyError:
-                print(a)
+                print(foo)
                 pass
 
     def parseSongAlphaXML(self):
         saglob = glob.glob(self.songalpha)
-        salist = []
         for sa in saglob:
             tree = ET.parse(sa)
             root = tree.getroot()
-            club = {}
+            club = []
             for child in root:
-                club.update({child.tag:child.text})
-                salist.append(club)
-        print(salist)
-        for s in salist:
+                club.append(child.text)
+            zoo = {"songalpha": club}
             try:
-                viewsdb.songalpha.insert(s)
+                viewsdb.songalpha.insert(zoo)
             except pymongo.errors.DuplicateKeyError:
-                print(s)
+                print(zoo)
                 pass
 
     def parsePicsXML(self):
