@@ -41,6 +41,7 @@ class ParseMyXML:
                 mlist.append(clubs)
         print(mlist)
         for m in mlist:
+            print("inserting main record")
             viewsdb.albalpha.insert(m)
 
     def parseArtViewXML(self):
@@ -55,6 +56,7 @@ class ParseMyXML:
                 arvlist.append(spades)
         print(arvlist)
         for a in arvlist:
+            print("inserting in to artview")
             viewsdb.albalpha.insert(a)
 
     def parseAlbViewXML(self):
@@ -69,6 +71,7 @@ class ParseMyXML:
                 avlist.append(clubs)
         print(avlist)
         for a in avlist:
+            print("inserting insto albumview")
             viewsdb.albalpha.insert(a)
 
     def parseSongViewXML(self):
