@@ -44,7 +44,11 @@ class ParseMyXML:
         print(mlist)
         for m in mlist:
             print("inserting main record")
-            db.main.insert(m)
+            try:
+                db.main.insert(m)
+            except pymongo.errors.DuplicateKeyError:
+                print(m)
+                pass
 
     def parseCredsXML(self):
         cglob = glob.glob(self.credsdir)
