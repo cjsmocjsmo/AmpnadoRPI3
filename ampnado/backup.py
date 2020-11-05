@@ -93,6 +93,30 @@ class CreateBackups:
                 for d in dataxml:
                     nff.writelines(d)
 
+    def CredsBackup(self):
+        allcreds = db.user_creds.find({})
+        count = 0
+        for a in allcreds:
+            dataxml = CMXML.CreateCredsXML(a)
+            count += 1
+            newfile = self.p2 + "/ampBackup_" + str(count) + ".xml"
+            with open(newfile, "w+") as nff:
+                for d in dataxml:
+                    nff.writelines(d)
+
+
+# {
+# 	"_id" : ObjectId("5fa386830b459b0001de6073"),
+# 	"username" : "admin",
+# 	"password" : "582d8c4c04ee2711a2b6c46ff29fdaa726671560424e879cd96f1c0c0735989723ecf379cd9f7fad19adaecb42405b5db62c980a1706dc3a38fa954683862212",
+# 	"user_id" : "01a0aa0948a7ddf3a9e98c1ac5fe38e0426292ea9767a1f6a3c352e06d35cdef90acf3e0b57285f8635ccf535097d5cf82c04d90fbbdedd4618a0353d4532969"
+# }
+
+
+
+
+
+
     def ArtAlphaBackup(self):
         allartalpha = viewsdb.artalpha.find({}, {"_id": 0})
         count  = 0
@@ -175,6 +199,7 @@ class CreateBackups:
     def CreateAllBackups(self):
         self.makedirs()
         self.MainBackup()
+        self.CredsBackup()
         self.ArtAlphaBackup()
         self.AlbAlphaBackup()
         self.SongAlphaBackup()

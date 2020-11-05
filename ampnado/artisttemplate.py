@@ -24,6 +24,15 @@ class CreateMyXML:
         ]
         return mainXML
 
+    def CreateCredsXML(self, data):
+        a1 = "<Creds> \n"
+        a2 = "\t <username>{}</username> \n".format(data["username"])
+        a3 = "\t <password<{}</password \n".format(data["password"])
+        a4 = "\t <user_id>{}</user_id> \n".format(data["user_id"])
+        a5 = "</Creds> \n"
+        credsxml = [self.m1, a1, a2, a3, a4]
+        return credsxml
+
     def CreatAlbumViewXML(self, data):
         # albumView
         av2 = "<AlbumView> \n"

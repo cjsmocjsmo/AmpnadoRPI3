@@ -21,6 +21,7 @@ pdb = ampPDBClient.picdb
 class ParseMyXML:
     def __init__(self):
         self.maindir = "/home/teresa/Desktop/AmpBackup/ampnadoDB/main/*.xml"
+        self.credsdir = "/home/teresa/Desktop/AmpBackup/ampnadoDB/user_creds/*.xml"
         self.artview = "/home/teresa/Desktop/AmpBackup/ampviewsDB/artistView/*.xml"
         self.albview = "/home/teresa/Desktop/AmpBackup/ampviewsDB/albumView/*.xml"
         self.songview = "/home/teresa/Desktop/AmpBackup/ampviewsDB/songView/*.xml"
@@ -42,7 +43,23 @@ class ParseMyXML:
         print(mlist)
         for m in mlist:
             print("inserting main record")
-            viewsdb.albalpha.insert(m)
+            db.main.insert(m)
+
+    def parseCredsXML(self):
+        cglob = glob.glob(self.credsdir)
+        clist = []
+        for c in clist:
+            tree = ET.parse(c)
+            root = tree.getroot()
+            spades = {}
+            for child in root:
+                spades.update({child.tag:child.text})
+                clist.append(spades)
+        print(clist)
+        for c in clist:
+            print("inserting main record")
+            db.user_creds.insert(c)
+
 
     def parseArtViewXML(self):
         arvglob = glob.glob(self.artview)
@@ -146,6 +163,7 @@ class ParseMyXML:
 
     def parseAllXML(self):
         self.parseMainXML()
+        self.parseCredsXML()
         self.parseArtViewXML()
         self.parseAlbViewXML()
         self.parseSongViewXML()
