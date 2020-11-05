@@ -18,7 +18,7 @@
 	# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ###############################################################################
 ###############################################################################
-import os, time, argparse
+import os, time, argparse, glob
 #import inputs as gp
 import functions as fun
 import findjpgs as fj
@@ -62,8 +62,10 @@ class SetUp():
 
 
 		print("STARTING MAIN")
-		ckfile = "/usr/share/Ampnado/AmpBackup/ampnadoDB/main/ampBackup_1.xml"
-		if os.path.isfile(ckfile):
+		ckfile = "/usr/share/Ampnado/AmpBackup/ampnadoDB/main/*.xml"
+		goo = glob.glob(ckfile)
+		if len(goo) != 0:
+		# if os.path.isfile(ckfile):
 			boo = parsexml.ParseMyXML()
 			print('STARTING PARSE XML')
 			boo.parseAllXML()

@@ -20,15 +20,15 @@ pdb = ampPDBClient.picdb
 
 class ParseMyXML:
     def __init__(self):
-        self.maindir = "/home/teresa/Desktop/AmpBackup/ampnadoDB/main/*.xml"
-        self.credsdir = "/home/teresa/Desktop/AmpBackup/ampnadoDB/user_creds/*.xml"
-        self.artview = "/home/teresa/Desktop/AmpBackup/ampviewsDB/artistView/*.xml"
-        self.albview = "/home/teresa/Desktop/AmpBackup/ampviewsDB/albumView/*.xml"
-        self.songview = "/home/teresa/Desktop/AmpBackup/ampviewsDB/songView/*.xml"
-        self.artalpha = "/home/teresa/Desktop/AmpBackup/ampviewsDB/artalpha/*.xml"
-        self.albalpha = "/home/teresa/Desktop/AmpBackup/ampviewsDB/albalpha/*.xml"
-        self.songalpha = "/home/teresa/Desktop/AmpBackup/ampviewsDB/songalpha/*.xml"
-        self.picdir = "/home/teresa/Desktop/AmpBackup/picdb/pics/*.xml"
+        self.maindir = "/usr/share/Ampnado/AmpBackup/ampnadoDB/main/*.xml"
+        self.credsdir = "/usr/share/Ampnado/AmpBackup/ampnadoDB/user_creds/*.xml"
+        self.artview = "/usr/share/Ampnado/AmpBackup/ampviewsDB/artistView/*.xml"
+        self.albview = "/usr/share/Ampnado/AmpBackup/ampviewsDB/albumView/*.xml"
+        self.songview = "/usr/share/Ampnado/AmpBackup/ampviewsDB/songView/*.xml"
+        self.artalpha = "/usr/share/Ampnado/AmpBackup/ampviewsDB/artalpha/*.xml"
+        self.albalpha = "/usr/share/Ampnado/AmpBackup/ampviewsDB/albalpha/*.xml"
+        self.songalpha = "/usr/share/Ampnado/AmpBackup/ampviewsDB/songalpha/*.xml"
+        self.picdir = "/usr/share/Ampnado/AmpBackup/picdb/pics/*.xml"
 
     def parseMainXML(self):
         print("STARTNG PARSEMAIN")
