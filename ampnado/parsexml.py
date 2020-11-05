@@ -142,11 +142,11 @@ class ParseMyXML:
 
     def parseAlbAlphaXML(self):
         aaglob = glob.glob(self.albalpha)
-
+        spades = []
         for aa in aaglob:
             tree = ET.parse(aa)
             root = tree.getroot()
-            spades = []
+            
             for child in root:
                 spades.append(child.text)
         foo = {"albalpha": spades}
@@ -159,10 +159,11 @@ class ParseMyXML:
 
     def parseSongAlphaXML(self):
         saglob = glob.glob(self.songalpha)
+        club = []
         for sa in saglob:
             tree = ET.parse(sa)
             root = tree.getroot()
-            club = []
+            
             for child in root:
                 club.append(child.text)
         zoo = {"songalpha": club}
