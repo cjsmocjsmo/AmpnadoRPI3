@@ -31,6 +31,7 @@ class ParseMyXML:
         self.picdir = "/home/teresa/Desktop/AmpBackup/picdb/pics/*.xml"
 
     def parseMainXML(self):
+        print("STARTNG PARSEMAIN")
         mglob = glob.glob(self.maindir)
         mlist = []
         for m in mglob:
@@ -48,7 +49,7 @@ class ParseMyXML:
     def parseCredsXML(self):
         cglob = glob.glob(self.credsdir)
         clist = []
-        for c in clist:
+        for c in cglob:
             tree = ET.parse(c)
             root = tree.getroot()
             spades = {}
@@ -162,6 +163,7 @@ class ParseMyXML:
             pdb.pics.insert(m)
 
     def parseAllXML(self):
+        print("STARTING PARSEALLXML")
         self.parseMainXML()
         self.parseCredsXML()
         self.parseArtViewXML()
@@ -171,6 +173,7 @@ class ParseMyXML:
         self.parseAlbAlphaXML()
         self.parseSongAlphaXML()
         self.parsePicsXML()
+        print('PARSEALLXML IS COMPLETE')
 
 if __name__ == "__main__":
     pmx = ParseMyXML()

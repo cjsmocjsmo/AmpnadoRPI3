@@ -149,6 +149,7 @@ if __name__ == "__main__":
 	ckfile = "/usr/share/Ampnado/AmpBackup/ampnadoDB/main/ampBackup_1.xml"
 	if os.path.isfile(ckfile):
 		boo = PXML.ParseMyXML()
+		print('STARTING PARSE XML')
 		boo.parseAllXML()
 	else:
 		su = SetUp()
