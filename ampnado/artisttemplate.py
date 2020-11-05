@@ -47,11 +47,14 @@ class CreateMyXML:
         albumViewXML = [
             self.m1, av2, av3, av4, av5, av6, av7, av8, av9, av10,
         ]
+        songlist = []
         for s in data["Songs"]:
-            av11 = "\t\t <Songname>{}</Songname> \n".format(s[0])
-            albumViewXML.append(av11)
-            av12 = "\t\t <SongId>{}</SongId> \n".format(s[0])
-            albumViewXML.append(av12)
+            songitem = [
+                "\t\t <Songname>{}</Songname> \n".format(s[0]),
+                "\t\t <SongId>{}</SongId> \n".format(s[1]),
+            ]
+            songlist.append(songitem)
+        albumViewXML.append(songlist)
         albumViewXML.append("\t </Songs> \n")
         albumViewXML.append("</AlbumView> \n")
         return albumViewXML
@@ -64,11 +67,14 @@ class CreateMyXML:
         a5 = "\t <Page>{}</Page> \n".format(data["Page"])
         a6 = "\t <Albums> \n"
         artistViewXML = [self.m1, a2, a3, a4, a5, a6]
+        artistlist = []
         for a in data["Albums"]:
-            a7 = "\t <Album>{}</Album> \n".format(a[0])
-            artistViewXML.append(a7)
-            a8 = "\t <AlbumId>{}</AlbumId> \n".format(a[1])
-            artistViewXML.append(a8)
+            artistitem = [
+                "\t <Album>{}</Album> \n".format(a[0]),
+                "\t <AlbumId>{}</AlbumId> \n".format(a[1])
+            ]
+            artistlist.append(artistitem)
+        artistViewXML.append(artistlist)
         a9 = "\t </Albums> \n"
         artistViewXML.append(a9)
         a10 = "</ArtistView> \n"

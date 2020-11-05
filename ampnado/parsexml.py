@@ -101,7 +101,6 @@ class ParseMyXML:
             for child in root:
                 clubs.update({child.tag:child.text})
                 avlist.append(clubs)
-        print(avlist)
         for a in avlist:
             try:
                 viewsdb.albalpha.insert(a)
@@ -126,10 +125,10 @@ class ParseMyXML:
 
     def parseArtAlphaXML(self):
         arglob = glob.glob(self.artalpha)
+        diamonds = []
         for ar in arglob:
             tree = ET.parse(ar)
             root = tree.getroot()
-            diamonds = []
             for child in root:
                 diamonds.append(child.text)
         bar = {"artalpha": diamonds}
