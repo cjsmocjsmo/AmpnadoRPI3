@@ -101,61 +101,92 @@ class CreateBackups:
         allmain = db.main.find({}, {"_id": 0})
         count = 0
         for a in allmain:
-            dataxml = CMXML.CreateMainXML(a)
             count += 1
-            newfile2 = self.p1 + "/ampBackup_" + str(count) + ".xml"
-            with open(newfile2, "w+") as nff:
-                for d in dataxml:
-                    nff.writelines(d)
+            newfile2 = self.p1 + "/ampJSONBackup_" + str(count) + ".json"
+            with open(newfile2, "w+") as nff2:
+                nff2.write(json.dumps(a, indent=4))
+
+        # for a in allmain:
+        #     dataxml = CMXML.CreateMainXML(a)
+        #     count += 1
+        #     newfile2 = self.p1 + "/ampBackup_" + str(count) + ".xml"
+        #     with open(newfile2, "w+") as nff:
+        #         for d in dataxml:
+        #             nff.writelines(d)
 
     def CredsBackup(self):
         allcreds = db.user_creds.find({})
         count = 0
         for a in allcreds:
-            dataxml = CMXML.CreateCredsXML(a)
             count += 1
-            newfile = self.p2 + "/ampBackup_" + str(count) + ".xml"
-            with open(newfile, "w+") as nff:
-                for d in dataxml:
-                    nff.writelines(d)
+            newfile = self.p2 + "/ampJSONBackup_" + str(count) + ".json"
+            with open(newfile, "w+") as nff2:
+                nff2.write(json.dumps(a, indent=4))
+
+        # for a in allcreds:
+        #     dataxml = CMXML.CreateCredsXML(a)
+        #     count += 1
+        #     newfile = self.p2 + "/ampBackup_" + str(count) + ".xml"
+        #     with open(newfile, "w+") as nff:
+        #         for d in dataxml:
+        #             nff.writelines(d)
 
     def ArtAlphaBackup(self):
         allartalpha = viewsdb.artalpha.find({}, {"_id": 0})
         count  = 0
         for a in allartalpha:
-            dataxml = CMXML.CreateArtAlphaXML(a)
             count += 1
-            newfile = self.p3 + "/ampBackup_" + str(count) + ".xml"
-            with open(newfile, "w+") as nff:
-                for d in dataxml:
-                    nff.writelines(d)
+            newfile = self.p3 + "/ampJSONBackup_" + str(count) + ".json"
+            with open(newfile, "w+") as nff2:
+                nff2.write(json.dumps(a, indent=4))
+
+        # for a in allartalpha:
+        #     dataxml = CMXML.CreateArtAlphaXML(a)
+        #     count += 1
+        #     newfile = self.p3 + "/ampBackup_" + str(count) + ".xml"
+        #     with open(newfile, "w+") as nff:
+        #         for d in dataxml:
+        #             nff.writelines(d)
 
     def AlbAlphaBackup(self):
         allalbalpha = viewsdb.albalpha.find({}, {"_id": 0})
         count = 0
         for a in allalbalpha:
-            dataxml = CMXML.CreateAlbAlphaXML(a)
             count += 1
-            newfile = self.p4 + "/ampBackup_" + str(count) + ".xml"
-            with open(newfile, "w+") as nff:
-                for d in dataxml:
-                    nff.writelines(d)
+            newfile = self.p4 + "/ampJSONBackup_" + str(count) + ".json"
+            with open(newfile, "w+") as nff2:
+                nff2.write(json.dumps(a, indent=4))
+
+        # for a in allalbalpha:
+        #     dataxml = CMXML.CreateAlbAlphaXML(a)
+        #     count += 1
+        #     newfile = self.p4 + "/ampBackup_" + str(count) + ".xml"
+        #     with open(newfile, "w+") as nff:
+        #         for d in dataxml:
+        #             nff.writelines(d)
 
     def SongAlphaBackup(self):
         allsongalpha = viewsdb.songalpha.find({}, {"_id": 0})
         count = 0
-        for a in allsongalpha:
-            dataxml = CMXML.CreateSongAlphaXML(a)
+        for s in allsongalpha:
             count += 1
-            newfile = self.p5 + "/ampBackup_" + str(count) + ".xml"
+            newfile = self.p5 + "/ampJSONBackup_" + str(count) + ".json"
             with open(newfile, "w+") as nff:
-                for d in dataxml:
-                    nff.writelines(d)
+                nff.write(json.dumps(s, indent=4))
+
+        # for a in allsongalpha:
+        #     dataxml = CMXML.CreateSongAlphaXML(a)
+        #     count += 1
+            
+        #     with open(newfile, "w+") as nff:
+        #         for d in dataxml:
+        #             nff.writelines(d)
 
     def ArtViewBackup(self):
         allartview = viewsdb.artistView.find({}, {"_id": 0})
         count = 0
         for a in allartview:
+            count += 1
             dataxml = CMXML.CreatArtistViewXML(a)
             count += 1
             newfile = self.p6 + "/ampBackup_" + str(count) + ".xml"
@@ -166,7 +197,6 @@ class CreateBackups:
     def AlbViewBackup(self):
         allalbview = viewsdb.albumView.find({}, {"_id": 0})
         count = 0
-
         for al in allalbview:
             count += 1
             newfile2 = self.p7 + "/ampJSONBackup_" + str(count) + ".json"
@@ -174,40 +204,51 @@ class CreateBackups:
                 foo = json.dumps(al, indent = 4)
                 nff2.write(foo)
 
-
-        for a in allalbview:
-            dataxml = CMXML.CreatAlbumViewXML(a)
-            count += 1
-            newfile = self.p7 + "/ampBackup_" + str(count) + ".xml"
-            with open(newfile, "w+") as nff:
-                for d in dataxml:
-                    print("this is the fuckup")
-                    print(d)
-                    nff.writelines(d)
+        # for a in allalbview:
+        #     dataxml = CMXML.CreatAlbumViewXML(a)
+        #     count += 1
+        #     newfile = self.p7 + "/ampBackup_" + str(count) + ".xml"
+        #     with open(newfile, "w+") as nff:
+        #         for d in dataxml:
+        #             print("this is the fuckup")
+        #             print(d)
+        #             nff.writelines(d)
 
     def SongViewBackup(self):
         allsongview = viewsdb.songView.find({}, {"_id": 0})
         count = 0
         for a in allsongview:
-            dataxml = CMXML.CreateSongViewXML(a)
             count += 1
-            newfile = self.p8 + "/ampBackup_" + str(count) + ".xml"
+            newfile = self.p8 + "/ampJSONBackup_" + str(count) + ".json"
             with open(newfile, "w+") as nff:
-                for d in dataxml:
-                    nff.writelines(d)
+                nff.write(json.dumps(a, indent=4))
+
+
+            # dataxml = CMXML.CreateSongViewXML(a)
+            # count += 1
+            # newfile = self.p8 + "/ampBackup_" + str(count) + ".xml"
+            # with open(newfile, "w+") as nff:
+            #     for d in dataxml:
+            #         nff.writelines(d)
 
     def PicBackup(self):
         allpics = pdb.pics.find({}, {"_id": 0})
         count = 0
         for a in allpics:
-            dataxml = CMXML.CreatePicsXML(a)
             count += 1
-            newfile = self.p9 + "/ampBackup_" + str(count) + ".xml"
-            print("PRINTING TO FILE:")
-            print(newfile)
+            newfile = self.p9 + "/ampJSONBackup_" + str(count) + ".json"
             with open(newfile, "w+") as nff:
-                for d in dataxml:
-                    nff.writelines(d)
+                nff.write(json.dumps(a, indent=4))
+
+
+            # dataxml = CMXML.CreatePicsXML(a)
+            # count += 1
+            # newfile = self.p9 + "/ampBackup_" + str(count) + ".xml"
+            # print("PRINTING TO FILE:")
+            # print(newfile)
+            # with open(newfile, "w+") as nff:
+            #     for d in dataxml:
+            #         nff.writelines(d)
 
     def CreateAllBackups(self):
         self.makedirs()
