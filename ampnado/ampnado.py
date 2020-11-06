@@ -22,11 +22,11 @@ import os, time, argparse, glob
 #import inputs as gp
 import functions as fun
 import findjpgs as fj
+import backup as BUP
+import parseJSONbackups as PJB
+from data import Data
 from pymongo import MongoClient
 from pprint import pprint
-from data import Data
-import backup as BUP
-import parsexml
 
 MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
 VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
@@ -37,12 +37,11 @@ ampDBClient.drop_database("ampnadoDB")
 
 ampvDBClient = MongoClient(VIEWSDB_ADDR)
 ampvDBClient.drop_database("ampviewsDB")
-#client.drop_database("config")
 
 picDBClient = MongoClient(PICDB_ADDR)
 picDBClient.drop_database("picdb")
 
-db = ampDBClient.ampnadoDB
+# db = ampDBClient.ampnadoDB
 
 class SetUp():
 	def __init__(self):
@@ -51,7 +50,6 @@ class SetUp():
 		self.FUN = FUN
 		FUNKY = fun.Functions()
 		FUNKY.insert_user(os.environ["AMP_USERNAME"], os.environ["AMP_PASSWORD"])
-
 
 	def gettime(self, at): return (time.time() - at)
 
@@ -62,11 +60,9 @@ class SetUp():
 
 
 		print("STARTING MAIN")
-		ckfile = "/usr/share/Ampnado/AmpBackup/ampnadoDB/main/*.xml"
-		goo = glob.glob(ckfile)
-		if len(goo) != 0:
-		# if os.path.isfile(ckfile):
-			boo = parsexml.ParseMyXML()
+		ckdir = "/usr/share/Ampnado/AmpBackup/ampnadoDB/main/*.json"
+		if len(glob.glob(ckdir)) != 0:
+			boo = PJB.ParseMyXML()
 			print('STARTING PARSE XML')
 			boo.parseAllXML()
 		else:
