@@ -165,6 +165,14 @@ class CreateBackups:
     def AlbViewBackup(self):
         allalbview = viewsdb.albumView.find({}, {"_id": 0})
         count = 0
+
+        for al in allalbview:
+            count += 1
+            newfile2 = self.p7 + "/ampJSONBackup_" + str(count) + ".json"
+            with open(newfile2, "w+") as nff2:
+                nff2.write(al)
+
+
         for a in allalbview:
             dataxml = CMXML.CreatAlbumViewXML(a)
             count += 1
