@@ -59,6 +59,7 @@ class CreateMyXML:
         # albumViewXML.append(songlist)
         albumViewXML.append("\t </Songs> \n")
         albumViewXML.append("</AlbumView> \n")
+        print(albumViewXML)
         return albumViewXML
 
     def CreatArtistViewXML(self, data):
