@@ -170,10 +170,11 @@ class CreateBackups:
             count += 1
             newfile = self.p7 + "/ampBackup_" + str(count) + ".xml"
             with open(newfile, "w+") as nff:
-                for d in dataxml:
-                    print("this is the fuckup")
-                    print(d)
-                    nff.writelines(d)
+                for dd in dataxml:
+                    for d in dd:
+                        print("this is the fuckup")
+                        print(d)
+                        nff.writelines(d)
 
     def SongViewBackup(self):
         allsongview = viewsdb.songView.find({}, {"_id": 0})
