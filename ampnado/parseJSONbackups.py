@@ -99,10 +99,10 @@ class ParseMyXML:
             with open(ar, "r") as mf:
                 myfile = mf.read()
             data = json.loads(myfile)
-        try:
-            viewsdb.albalpha.insert(data)
-        except pymongo.errors.DuplicateKeyError:
-            pass
+            try:
+                viewsdb.albalpha.insert(data)
+            except pymongo.errors.DuplicateKeyError:
+                pass
 
     def parseAlbAlphaXML(self):
         aaglob = glob.glob(self.albalpha)
@@ -110,10 +110,10 @@ class ParseMyXML:
             with open(aa, "r") as mf:
                 myfile = mf.read()
             data = json.load(myfile)
-        try:
-            viewsdb.albalpha.insert(data)
-        except pymongo.errors.DuplicateKeyError:
-            pass
+            try:
+                viewsdb.albalpha.insert(data)
+            except pymongo.errors.DuplicateKeyError:
+                pass
 
     def parseSongAlphaXML(self):
         saglob = glob.glob(self.songalpha)
@@ -121,10 +121,10 @@ class ParseMyXML:
             with open(sa, "r") as mf:
                 myfile = mf.read()
             data = json.loads(myfile)
-        try:
-            viewsdb.songalpha.insert(data)
-        except pymongo.errors.DuplicateKeyError:
-            pass
+            try:
+                viewsdb.songalpha.insert(data)
+            except pymongo.errors.DuplicateKeyError:
+                pass
 
     def parsePicsXML(self):
         picglob = glob.glob(self.picdir)
