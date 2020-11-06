@@ -171,7 +171,7 @@ class CreateBackups:
             count += 1
             newfile2 = self.p7 + "/ampJSONBackup_" + str(count) + ".json"
             with open(newfile2, "w+") as nff2:
-                foo = json.dump(al)
+                foo = json.dumps(al, indent = 4)
                 nff2.write(foo)
 
 
