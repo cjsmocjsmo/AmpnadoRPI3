@@ -115,7 +115,7 @@ class CreateBackups:
         #             nff.writelines(d)
 
     def CredsBackup(self):
-        allcreds = db.user_creds.find({})
+        allcreds = db.user_creds.find({}, {"_id": 0})
         count = 0
         for a in allcreds:
             count += 1
