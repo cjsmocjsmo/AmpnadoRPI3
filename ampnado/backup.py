@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import os
 import glob
+import json
 import shutil
 from pymongo import MongoClient
 import artisttemplate as AT
@@ -170,7 +171,8 @@ class CreateBackups:
             count += 1
             newfile2 = self.p7 + "/ampJSONBackup_" + str(count) + ".json"
             with open(newfile2, "w+") as nff2:
-                nff2.write(al)
+                foo = json.dump(al)
+                nff2.write(foo)
 
 
         for a in allalbview:
