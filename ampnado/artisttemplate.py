@@ -43,21 +43,113 @@ class CreateMyXML:
         av7 = "\t <AlbumArtHttpPath>{}</AlbumArtHttpPath> \n".format(data["AlbumArtHttpPath"])
         av8 = "\t <NumSongs>{}</NumSongs> \n".format(data["NumSongs"])
         av9 = "\t <Page>{}</Page> \n".format(data["Page"])
-        av10 = "\t <Songs>"
+        av10 = "\t <Songs> \n"
         albumViewXML = [
             self.m1, av2, av3, av4, av5, av6, av7, av8, av9, av10,
         ]
         songlist = []
         for s in data["Songs"]:
             songitem = [
-                "\t\t <Songname>{}</Songname> \n".format(s[0]),
-                "\t\t <SongId>{}</SongId> \n".format(s[1]),
+                "<Songname>{}</Songname> \n".format(s[0]),
+                "<SongId>{}</SongId> \n".format(s[1]),
             ]
             songlist.append(songitem)
         albumViewXML.append(songlist)
         albumViewXML.append("\t </Songs> \n")
         albumViewXML.append("</AlbumView> \n")
         return albumViewXML
+
+
+
+# {
+# 	"_id" : ObjectId("5fa50ff18bea3100ace0b437"),
+# 	"Artist" : "Alan Jackson",
+# 	"Album" : "Good Time",
+# 	"ArtistId" : "f5ae8c3c84464be9b24735c7b28d2ad6",
+# 	"AlbumId" : "cc1d7314eb2343bd9863c07210c0836b",
+# 	"AlbumArtHttpPath" : "/static/images/thumbnails/2e9c76fa8856429cab33e393eb06c3f7.jpg",
+# 	"NumSongs" : 15,
+# 	"Songs" : [
+# 		[
+# 			"Long Long Way",
+# 			"99cbd87db2aa43ea9cb6a04fd23e8c7c"
+# 		],
+# 		[
+# 			"Good Time",
+# 			"8abbae01d86a407793918ad8727583dc"
+# 		],
+# 		[
+# 			"Right Where I Want You",
+# 			"e71f9d170a7443b9a56fe05217864ab9"
+# 		],
+# 		[
+# 			"If Jesus Walked The World Today",
+# 			"39b237fb0e334dfc81c56893f6dbb196"
+# 		],
+# 		[
+# 			"This Time",
+# 			"dc8e058b821545a3aaf218dd99b8ca7b"
+# 		],
+# 		[
+# 			"Laid Back 'n Low Key",
+# 			"b5864371dd4e4697886135c5cd4085ed"
+# 		],
+# 		[
+# 			"Country Boy",
+# 			"3cc799343b8946a5a1349a8506661444"
+# 		],
+# 		[
+# 			"I Still Like Bologna",
+# 			"480e197159564754b37910ca5ac0866e"
+# 		],
+# 		[
+# 			"When The Love Factor's High",
+# 			"039cdabebd9d413ebea02d856711339a"
+# 		],
+# 		[
+# 			"Listen To Your Senses",
+# 			"aeea69ebdc864c38a8df3f5f36b3fce5"
+# 		],
+# 		[
+# 			"I Wish I Could Back Up",
+# 			"8029208f4d444f59aac6120d4b1ff316"
+# 		],
+# 		[
+# 			"Never Loved Before With Martina Mcbride",
+# 			"2d09dd7da85b46e4b04085222d6f90d4"
+# 		],
+# 		[
+# 			"If You Want To Make Me Happy",
+# 			"6c47762662bf40aab7957369f2366273"
+# 		],
+# 		[
+# 			"Small Town Southern Man",
+# 			"7222166eb08448d681ade9276ea548bc"
+# 		],
+# 		[
+# 			"1976",
+# 			"80f120109039416d9943e22b4fb6afa5"
+# 		]
+# 	],
+# 	"Page" : "1"
+# }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def CreatArtistViewXML(self, data):
         #artistView
@@ -70,8 +162,8 @@ class CreateMyXML:
         artistlist = []
         for a in data["Albums"]:
             artistitem = [
-                "\t <Album>{}</Album> \n".format(a[0]),
-                "\t <AlbumId>{}</AlbumId> \n".format(a[1])
+                "\tt <Album>{}</Album> \n".format(a[0]),
+                "\tt <AlbumId>{}</AlbumId> \n".format(a[1])
             ]
             artistlist.append(artistitem)
         artistViewXML.append(artistlist)
