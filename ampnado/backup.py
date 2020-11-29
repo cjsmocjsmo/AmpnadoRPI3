@@ -43,7 +43,6 @@ MONGO_ADDR = os.environ["AMP_AMPDB_ADDR"]
 VIEWSDB_ADDR = os.environ["AMP_VIEWSDB_ADDR"]
 PICDB_ADDR = os.environ['AMP_PICDB_ADDR']
 
-
 ampDBClient = MongoClient(MONGO_ADDR)
 ampDBClient.drop_database("ampnadoDB")
 db = ampDBClient.ampnadoDB
@@ -51,7 +50,6 @@ db = ampDBClient.ampnadoDB
 ampvDBClient = MongoClient(VIEWSDB_ADDR)
 ampvDBClient.drop_database("ampviewsDB")
 viewsdb = ampvDBClient.ampviewsDB
-
 
 picDBClient = MongoClient(PICDB_ADDR)
 picDBClient.drop_database("picdb")
@@ -74,8 +72,8 @@ class CreateBackups:
         self.p9 = "/".join((BDIR, self.pdb, "pics"))
 
         self.dirlist = [
-            self.p1, self.p2, self.p3, self.p4, self.p5, self.p6, self.p7, 
-            self.p8, self.p9
+            self.p1, self.p2, self.p3, self.p4, self.p5, 
+            self.p6, self.p7, self.p8, self.p9
         ]
 
     def makedirs(self):
