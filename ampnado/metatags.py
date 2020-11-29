@@ -49,7 +49,7 @@ class MP3Tags:
 
 		try:
 			self.audio = File(self.fn)
-		except (KeyError, mutagen.mp3.HeaderNotFoundError):
+		except (KeyError, mutagen.mp3.HeaderNotFoundError, AttributeError):
 			print(self.fn)
 			pass
 
