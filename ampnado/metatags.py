@@ -49,29 +49,29 @@ class MP3Tags:
 
 		try:
 			self.audio = File(self.fn)
-		except KeyError:
+		except (KeyError, mutagen.mp3.HeaderNotFoundError):
 			print(self.fn)
 			pass
 
 		try:
 			type(self).Track = self.audio['TRCK'].text[0]
-		except KeyError:
+		except (KeyError, AttributeError):
 			type(self).Track = '50'
 	
 		try:
 			type(self).Artist = self.audio["TPE1"].text[0]
-		except KeyError: 
+		except (KeyError, AttributeError): 
 			type(self).Artist = 'Fuck Artist'
 			print(''.join(("KeyError: No TPE1 tag... ", self.fn)))
 	
 		try:
 			type(self).Album = self.audio["TALB"].text[0]
-		except KeyError: 
+		except (KeyError, AttributeError): 
 			type(self).Album = 'Fuck Album'
 			print(''.join(("KeyError No TALB tag ... ", self.fn)))
 			
 		try:
 			type(self).Song = self.audio['TIT2'].text[0]
-		except KeyError: 
+		except (KeyError, AttributeError): 
 			type(self).Song = 'Fuck Song'
 			print(''.join(("KeyError: No TIT2 tag... ", self.fn)))
