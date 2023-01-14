@@ -9,7 +9,7 @@ services:
       - 27017:27017
 
   ampserv:
-    image: ampnadorpi:1.4
+    image: ampnadorpi:1.5
     build: .
     environment:
       - AMP_PROGRAM_PATH=/usr/share/Ampnado
